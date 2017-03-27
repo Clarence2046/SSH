@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+        http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+
+	
+	<!-- 参考自：http://gong1208.iteye.com/blog/1773177
+		Spring 定时任务配置
+			1，编写执行任务的类（普通的即可）
+			2，编写spring配置文件，可以单独写一个spring-task.xml文件，引入task的命名空间
+			xmlns:task="http://www.springframework.org/schema/task"
+			。。。。。。
+			http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd
+			
+			3，
+			<task:scheduled-tasks>
+				<task:scheduled ref="执行定时任务的bean" method="执行任务的方法" cron="cron表达式"/>
+			</task:scheduled-tasks>
+			
+			cron表达式例子：
+				0 0 10,14,16 * * ? 每天上午10点，下午2点，4点 
+				0 0/30 9-17 * * ? 朝九晚五工作时间内每半小时 
+				0 0 12 ? * WED 表示每个星期三中午12点 
+				"0 0 12 * * ?" 每天中午12点触发 
+				"0 15 10 ? * *" 每天上午10:15触发 
+				"0 15 10 * * ?" 每天上午10:15触发 
+				"0 15 10 * * ? *" 每天上午10:15触发 
+				"0 15 10 * * ? 2005" 2005年的每天上午10:15触发 
+				"0 * 14 * * ?" 在每天下午2点到下午2:59期间的每1分钟触发 
+				"0 0/5 14 * * ?" 在每天下午2点到下午2:55期间的每5分钟触发 
+				"0 0/5 14,18 * * ?" 在每天下午2点到2:55期间和下午6点到6:55期间的每5分钟触发 
+				"0 0-5 14 * * ?" 在每天下午2点到下午2:05期间的每1分钟触发 
+				"0 10,44 14 ? 3 WED" 每年三月的星期三的下午2:10和2:44触发 
+				"0 15 10 ? * MON-FRI" 周一至周五的上午10:15触发 
+				"0 15 10 15 * ?" 每月15日上午10:15触发 
+				"0 15 10 L * ?" 每月最后一日的上午10:15触发 
+				"0 15 10 ? * 6L" 每月的最后一个星期五上午10:15触发 
+				"0 15 10 ? * 6L 2002-2005" 2002年至2005年的每月的最后一个星期五上午10:15触发 
+				"0 15 10 ? * 6#3" 每月的第三个星期五上午10:15触发
+	 -->
+
+	<bean id="taskjob" class="com.shark.ocean.util.TaskTesy"></bean>
+
+	<task:scheduled-tasks>
+		<task:scheduled ref="taskjob" method="job1" cron="0 * * * * ?"/>
+	</task:scheduled-tasks>
+	
+	
+	<!-- 
+		也可以使用注解方式配置定时任务 
+			只需要开启任务注解功能
+			在编写的执行定时任务的方法上加上注解@Scheduled(cron="30 * * * * ?")
+	-->
+	<task:annotation-driven/>
+	
+
+</beans>
