@@ -77,7 +77,7 @@ public class PageUtil {
 			if (toIndex > size) {
 				toIndex = size;
 			}
-			this.pageList = this.list.subList(fromIndex, toIndex);
+			this.pageList = this.list.subList(fromIndex-1, toIndex);
 
 		}
 

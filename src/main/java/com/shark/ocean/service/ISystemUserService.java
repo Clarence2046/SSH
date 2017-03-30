@@ -10,4 +10,6 @@ public interface ISystemUserService {
 	public List<SystemUser> getAll();
 
 	public void deleteById(Long id);
+	
+	public List<SystemUser> getByField(String fieldName,Object fieldValue);
 }

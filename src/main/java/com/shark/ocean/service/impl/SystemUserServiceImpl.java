@@ -27,4 +27,9 @@ public class SystemUserServiceImpl implements ISystemUserService {
 		systemUserDao.deleteById(id);
 	}
 
+
+	public List<SystemUser> getByField(String fieldName, Object fieldValue) {
+		return systemUserDao.getByField(fieldName, fieldValue);
+	}
+
 }

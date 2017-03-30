@@ -16,13 +16,14 @@
 <meta name="description" content="Pure 后台管理  博客">
 <title>个人博客后台管理</title>
 
+
 </head>
 <script type="text/javascript">
 	var queryUrl = "#";
 
 	$(document).ready(function() {
 		backUser();
-		queryUrl  ="app/mgr/user/list";
+		queryUrl  ="app/mgr/right/list";
 	});
 
 
@@ -51,9 +52,9 @@
 	}
 
 	function addUser() {
-		var  r = checkField($("#username"),false);
+		var  r = checkField($("#authId"),false);
 		if(!r){
-			$("#id").focus();
+			$("#authId").focus();
 			return;
 		}
 		$.ajax({
@@ -72,13 +73,32 @@
 
 		});
 	}
+	
+	function edit(id){
+		//ajax 获取编辑页面，使用layer弹窗插件弹出
+		$.ajax({
+			url:"app/mgr/right/editpage.action",
+			type:"POST",
+			data:{"systemRight.authId" : id},
+			success:function(data){
+				layer.open({
+					  type: 1,
+					  title:"权限编辑",
+					  skin: 'layui-layer-rim', //加上边框
+					  area: ['600px', '600px'], //宽高
+					  content: data
+					});
+				}
+		});
+	}
+	
 	function deleteUser(id) {
 		if(confirm("你确定要删除吗？")){
 			$.ajax({
-				url : "app/mgr/user/delete.action?t=" + Math.random(),
+				url : "app/mgr/right/delete.action?t=" + Math.random(),
 				type : "post",
 				data : {
-					"systemUser.id" : id
+					"systemRight.authId" : id
 				},
 				success : function(data) {
 					var ret = JSON.parse(data);
@@ -102,7 +122,7 @@
 
 	function reloadList() {
 		$.ajax({
-			url : "app/mgr/user/list.action?t=" + Math.random(),
+			url : "app/mgr/right/list.action?t=" + Math.random(),
 			type : "post",
 			success : function(data) {
 				$("#main").html(data);
@@ -124,7 +144,7 @@
 		}
 		//ajax 校验用户名是否存在
 		$.ajax({
-			url:"app/mgr/ajaxuser/checkField",
+			url:"app/mgr/ajaxright/checkField",
 			type:"POST",
 			async:defaultAsync,
 			data:{"fieldId":fieldId,"fieldValue":fieldValue},
@@ -141,55 +161,6 @@
 		});
 		
 		return passed;
-	}
-	
-	
-	function relateRole(id){
-		//ajax 获取编辑页面，使用layer弹窗插件弹出
-		$.ajax({
-			url:"app/mgr/user/user_role_page.action",
-			type:"POST",
-			data:{"userId" : id},
-			success:function(data){
-				layer.open({
-					  type: 1,
-					  title:"权限编辑",
-					  btn:["保存","取消"],
-					  success:function(layero){
-					  	
-					  },
-					  yes:function(index,layero){
-					  	var str = "";
-						$(layero).find("#role_right_div").find("input[type=checkbox]").each(function(){
-							if($(this).is(":checked")){
-								str += $(this).attr("id");
-							}
-						});
-						//执行保存操作
-						$.ajax({
-							url:"app/mgr/user/user_role.action",
-							type:"POST",
-							data:{"userId":id,"roles":str},
-							success:function(data){
-								var ret = JSON.parse(data);
-								if (ret) {
-									layer.alert("保存成功！",function(){
-										layer.closeAll();
-									});
-								} else {
-									alert("保存失败!");
-								}
-							}
-						
-						});
-					  },
-					  no:function(index){},
-					  skin: 'layui-layer-rim', //加上边框
-					  area: ['300px', '400px'], //宽高
-					  content: data
-					});
-				}
-		});
 	}
 	
 </script>
@@ -230,45 +201,47 @@ font-size: 50%;
 .cus_required{
 	color: red;
 }
-table tr td{
-	text-align: center;
-}
 
+.header{
+	margin-bottom: 10px;
+}
 -->
 </style>
 <body>
 
 	<div class="header">
 		<div align="left">
-			<a  onclick="goAddUser()" class="btn btn-success btn-md"><label class="fa fa-user fa-lg"></label> 添加用户</a>
+			<a  onclick="goAddUser()" class="btn btn-success btn-md"><label class="fa fa-user fa-lg"></label> 添加权限</a>
 			<a id="backBtn"  onclick="backUser()" class="btn btn-primary"><label class="fa fa-mail-reply"></label> 返回</a>
 		</div>
 	</div>
 
-	<div id="list_div" class="content">
+	<div id="list_div" class="content" style="max-width: 1100px;">
 		<div class="cus_tip">
-			<label > 系统用户列表 </label>
+			<label > 系统权限列表 </label>
 		</div>
 		<table  class="table table-striped">
 			<tr>
-				<td>&nbsp;#</td>
-				<td>用户名</td>
-				<td>类型</td>
+				<td>编号</td>
+				<td>父权限编号</td>
+				<td>权限名称</td>
+				<td>权限路径</td>
+				<td>访问路径</td>
+				<td>权限等级</td>
+				<td>权限状态</td>
 				<td>操作</td>
 			</tr>
-			<c:forEach items="${result.pageList }" var="sysuser">
+			<c:forEach items="${result.pageList }" var="vo">
 				<tr>
-					<td >${sysuser.id }</td>
-					<td >${sysuser.username }</td>
-					<td >${sysuser.type=="1"?"高级管理员":"普通管理员" }</td>
-					<td >
-					<a class="btn btn-danger btn-sm glyphicon glyphicon-trash"  onclick="deleteUser('${sysuser.id }')">
-					删除
-					</a>
-					|
-					<a class="btn btn-warning btn-sm glyphicon glyphicon-link"  onclick="relateRole('${sysuser.id }')">
-						关联角色
-					</a>
+					<td >${vo.authId }</td>
+					<td >${vo.parentAuthId }</td>
+					<td >${vo.authName }</td>
+					<td >${vo.authUrl }</td>
+					<td >${vo.visitUrl }</td>
+					<td >${vo.authLevel==1?"一级菜单":(vo.authLevel==2?"二级菜单":"页面内权限") }</td>
+					<td >${vo.authStatus==0?"启用":"关闭" }</td>
+					<td ><a class="btn btn-danger btn-sm"  onclick="deleteUser('${vo.authId }')"><li class="fa fa-trash"></li></a>
+					|<a class="btn btn-primary btn-sm"  onclick="edit('${vo.authId}')"><li class="fa fa-edit"></li></a>
 					</td>
 				</tr>
 			</c:forEach>
@@ -319,35 +292,59 @@ table tr td{
 	</div>
 	<div id="add_div" class="content">
 		<div class="cus_tip">
-			<label > 提示：在这里你可以添加管理员</label>
+			<label > 提示：在这里你可以添加权限信息</label>
 		</div>
 		<div class="pure-g">
 			<div class="pure-u-1-3"></div>
 			<div class="pure-u-2-3">
-				<form id="add_frm" action="app/mgr/user/add.action"
+				<form id="add_frm" action="app/mgr/right/add.action"
 					class="pure-form pure-form-aligned" method="post">
 					<div>
-						<label>用户名</label> <input type="text" id="username" name="systemUser.username" required="required" onblur="checkField(this,true)"/>
+						<label>权限编号</label> <input type="text" id="authId" name="systemRight.authId" required="required" onblur="checkField(this)"/>
 						<label class="cus_required">*</label>
-						<label cfor="username"></label>
+						<label cfor="authId"></label>
 					</div>
 					<div>
-						<label>密&nbsp;&nbsp;码</label> <input type="password" id="password" required="required" minlength="6"
-							name="systemUser.password" />
-							<label class="cus_required">*</label>
+						<label>上级编号</label> <input type="text" id="parentAuthId" name="systemRight.parentAuthId" required="required"/>
+						<label class="cus_required">*</label>
+						<label for="parentAuthId"></label>
 					</div>
 					<div>
-						<label>分&nbsp;&nbsp;组</label> <select name="systemUser.type" id="type" required
-							>
+						<label>权限名称</label> 
+						<input type="text" id="authName" required="required" name="systemRight.authName" />
+						<label class="cus_required">*</label>
+					</div>
+					<div>
+						<label>权限路径</label> 
+						<input type="text" id="authUrl" required="required"  name="systemRight.authUrl" />
+						<label class="cus_required">*</label>
+					</div>
+					<div>
+						<label>访问路径</label> 
+						<input type="text" id="visitUrl" required="required"  name="systemRight.visitUrl" />
+						<label class="cus_required">*</label>
+					</div>
+					<div>
+						<label>权限等级</label> 
+						<select name="systemRight.authLevel" required>
 							<option value="">请选择</option>
-							<option value="1">高级管理员</option>
-							<option value="2">普通管理员</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
 						</select>
 						<label class="cus_required">*</label>
 					</div>
 					<div>
-						<label>描&nbsp;&nbsp;述</label> 
-						<textarea name="systemUser.description" cols="27" rows="5" style="resize:none" ></textarea>
+						<label>是否启用</label> 
+						<select name="systemRight.authStatus" required>
+							<option value="0">启用</option>
+							<option value="1">不启用</option>
+						</select>
+						<label class="cus_required">*</label>
+					</div>
+					<div>
+						<label>描&nbsp;&nbsp;&nbsp;&nbsp;述</label> 
+						<textarea name="systemRight.description" cols="27" rows="5" style="resize:none" ></textarea>
 					</div>
 					<div style="margin-top: 5px;margin-left: 20%">
 						<button name="添加" type="submit" class="btn btn-success" >添加</button>

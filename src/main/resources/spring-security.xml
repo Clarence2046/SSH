@@ -8,18 +8,27 @@
           http://www.springframework.org/schema/security/spring-security.xsd">
 
 
-	<security:http security="none" pattern="/session_error.jsp"></security:http>
+	<security:http security="none" pattern="/session*"></security:http>
+	<security:http security="none" pattern="/login.jsp"></security:http>
+	<security:http security="none" pattern="/login_error.jsp"></security:http>
+	<security:http security="none" pattern="/login_fail.jsp"></security:http>
+	<security:http security="none" pattern="/pure/**"></security:http>
+	<security:http security="none" pattern="/js/**"></security:http>
+	<security:http security="none" pattern="/imgs/**"></security:http>
+	<security:http security="none" pattern="/font-awesome-4.7.0/**"></security:http>
+	<security:http security="none" pattern="/bootstrap-3.3.5-dist/**"></security:http>
 
 
-	<security:http auto-config="true" use-expressions="false" >
+	<security:http auto-config="false" use-expressions="false" >
+	<!-- 改为数据库获取权限后，这里没有用了，登录会重定向，改为配置到外面就可以了 	
+	
 		<security:intercept-url pattern="/login.jsp" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
 		<security:intercept-url pattern="/login_fail.jsp" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
 		<security:intercept-url pattern="/login_error.jsp" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
 		<security:intercept-url pattern="/session_timeout.jsp" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
-		<security:intercept-url pattern="/admin_mgr.jsp" access="ROLE_ADMIN"/>
-		
+		<security:intercept-url pattern="/admin_mgr.jsp" access="ROLE_ADMIN" />
 		<security:intercept-url pattern="/user/**" access="ROLE_ADMIN" />
-		<security:intercept-url pattern="/app/mgr/**" access="ROLE_USER" />
+		<security:intercept-url pattern="/app/mgr/**" access="ROLE_USER" /> -->
 		
 	   <!-- 登陆管理
 	   		authentication-success-handler-ref 会覆盖default-target-ur的设定 
@@ -31,7 +40,7 @@
 							  login-processing-url="/login.action"
 							  username-parameter="username"
 							  password-parameter="password"
-							  default-target-url="/app/mgr"
+							  default-target-url="/app/mgr/index"
 							  authentication-failure-url="/login_fail.jsp"
 							  />
 		<!-- 在退出登陆时，删除对应的session信息，避免session信息失效后重新登录，任然会使用之前的sessionid进行验证请求，会报告session超时 -->
@@ -56,10 +65,14 @@
 			 -->
 			<security:concurrency-control max-sessions="1" error-if-maximum-exceeded="true"/>
 		</security:session-management>
+		
+		
+		<security:custom-filter ref="myfilter" before="FILTER_SECURITY_INTERCEPTOR"/>
+		
 	</security:http>
 
-	<security:authentication-manager>
-	
+	<security:authentication-manager alias="authmanager">
+		
 		<!-- 改变认证的数据来源 -->
 		<security:authentication-provider user-service-ref="customUserService">
 			<security:password-encoder base64="true" hash="md5">
@@ -97,4 +110,17 @@
 	<bean id="customUserService" class="com.shark.ocean.security.CustomUserJdbcService">
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
+	
+	<bean id="myfilter" class="com.shark.ocean.security.CustomFilterSecurityInterceptor">
+		<property name="authenticationManager" ref="authmanager"></property>
+		<property name="accessDecisionManager" ref="customAccessDecisionManager"></property>
+		<property name="securityMetadataSource" ref="customMetadataSourceService"></property>
+	</bean>
+	
+	<bean id="customAccessDecisionManager" class="com.shark.ocean.security.CustomAccessDecisionManager"></bean>
+	<bean id="customMetadataSourceService" class="com.shark.ocean.security.MyInvocationSecurityMetadataSourceService">
+		<constructor-arg  name="systemRightService" ref="systemRightService"></constructor-arg>
+	</bean>
+	
+	
 </beans>
