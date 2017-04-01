@@ -5,6 +5,9 @@
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
+
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,14 +18,14 @@
     <title>光阴易逝 &ndash; 岁月无回</title>
     
 <!--     <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" integrity="sha384-" crossorigin="anonymous"> -->
-    <link rel="stylesheet" href="pure/pure-release-0.6.2/pure-min.css" integrity="sha384-" crossorigin="anonymous">
+    <link rel="stylesheet" href="third/pure/pure-release-0.6.2/pure-min.css" integrity="sha384-" crossorigin="anonymous">
     
     <!--[if lte IE 8]>
         <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/grids-responsive-old-ie-min.css">
     <![endif]-->
     <!--[if gt IE 8]><!-->
 <!--         <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/grids-responsive-min.css"> -->
-        <link rel="stylesheet" href="pure/pure-release-0.6.2/grids-responsive-min.css">
+        <link rel="stylesheet" href="third/pure/pure-release-0.6.2/grids-responsive-min.css">
     <!--<![endif]-->
     
     
@@ -30,7 +33,7 @@
             <link rel="stylesheet" href="css/layouts/blog-old-ie.css">
         <![endif]-->
         <!--[if gt IE 8]><!-->
-            <link rel="stylesheet" href="pure/blog/css/layouts/blog.css">
+            <link rel="stylesheet" href="third/pure/blog/css/layouts/blog.css">
         <!--<![endif]-->
 </head>
 <body>
@@ -63,7 +66,7 @@
                 <!-- A single blog post -->
                 <section class="post">
                     <header class="post-header">
-                        <img width="48" height="48" alt="Tilo Mitra&#x27;s avatar" class="post-avatar" src="pure/blog/img/common/tilo-avatar.png">
+                        <img width="48" height="48" alt="Tilo Mitra&#x27;s avatar" class="post-avatar" src="third/pure/blog/img/common/tilo-avatar.png">
 
                         <h2 class="post-title">Introducing Pure</h2>
 
@@ -82,82 +85,27 @@
 
             <div class="posts">
                 <h1 class="content-subhead">Recent Posts</h1>
-
+				<c:forEach items="${blogs }" var="blog">
+				
                 <section class="post">
                     <header class="post-header">
-                        <img width="48" height="48" alt="Eric Ferraiuolo&#x27;s avatar" class="post-avatar" src="pure/blog/img/common/ericf-avatar.png">
+                        <img width="48" height="48" alt="Eric Ferraiuolo&#x27;s avatar" class="post-avatar" src="third/pure/blog/img/common/tilo-avatar.png">
 
-                        <h2 class="post-title">Everything You Need to Know About Grunt</h2>
+                        <h2 class="post-title">${blog.title }</h2>
 
                         <p class="post-meta">
-                            By <a class="post-author" href="#">Eric Ferraiuolo</a> under <a class="post-category post-category-js" href="#">JavaScript</a>
+                            By <a class="post-author" href="#">${blog.author }</a> under <a class="post-category post-category-js" href="#">JavaScript</a>
                         </p>
                     </header>
 
                     <div class="post-description">
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                            ${blog.contentHtml }
                         </p>
                     </div>
                 </section>
 
-                <section class="post">
-                    <header class="post-header">
-                        <img width="48" height="48" alt="Reid Burke&#x27;s avatar" class="post-avatar" src="pure/blog/img/common/reid-avatar.png">
-
-                        <h2 class="post-title">Photos from CSSConf and JSConf</h2>
-
-                        <p class="post-meta">
-                            By <a class="post-author" href="#">Reid Burke</a> under <a class="post-category" href="#">Uncategorized</a>
-                        </p>
-                    </header>
-
-                    <div class="post-description">
-                        <div class="post-images pure-g">
-                            <div class="pure-u-1 pure-u-md-1-2">
-                                <a href="http://www.flickr.com/photos/uberlife/8915936174/">
-                                    <img alt="Photo of someone working poolside at a resort"
-                                         class="pure-img-responsive"
-                                         src="http://farm8.staticflickr.com/7448/8915936174_8d54ec76c6.jpg">
-                                </a>
-
-                                <div class="post-image-meta">
-                                    <h3>CSSConf Photos</h3>
-                                </div>
-                            </div>
-
-                            <div class="pure-u-1 pure-u-md-1-2">
-                                <a href="http://www.flickr.com/photos/uberlife/8907351301/">
-                                    <img alt="Photo of the sunset on the beach"
-                                         class="pure-img-responsive"
-                                         src="http://farm8.staticflickr.com/7382/8907351301_bd7460cffb.jpg">
-                                </a>
-
-                                <div class="post-image-meta">
-                                    <h3>JSConf Photos</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="post">
-                    <header class="post-header">
-                        <img width="48" height="48" alt="Andrew Wooldridge&#x27;s avatar" class="post-avatar" src="pure/blog/img/common/andrew-avatar.png">
-
-                        <h2 class="post-title">YUI 3.10.2 Released</h2>
-
-                        <p class="post-meta">
-                            By <a class="post-author" href="#">Andrew Wooldridge</a> under <a class="post-category post-category-yui" href="#">YUI</a>
-                        </p>
-                    </header>
-
-                    <div class="post-description">
-                        <p>
-                            We are happy to announce the release of YUI 3.10.2! You can find it now on the Yahoo! CDN, download it directly, or pull it in via npm. We’ve also updated the YUI Library website with the latest documentation.
-                        </p>
-                    </div>
-                </section>
+				</c:forEach>
             </div>
 
             <div class="footer">
@@ -172,11 +120,11 @@
         </div>
     </div>
     
-    <div class="sidebar pure-u-1 pure-u-md-1-5">
+   <!--  <div class="sidebar pure-u-1 pure-u-md-1-5">
         <div class="header">
             
         </div>
-    </div>
+    </div> -->
 </div>
 
 

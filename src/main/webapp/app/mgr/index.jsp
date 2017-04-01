@@ -13,25 +13,27 @@
 <html>
 <head>
 	<base href="<%=basePath %>">
+	<c:set var="basePath" value="<%=basePath %>"></c:set>
 	<meta http-equiv="Content-Type" content="text/html; charset=GBK">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Pure 后台管理  博客">
     <title>个人博客后台管理</title>
-    <link rel="stylesheet" href="pure/pure-release-0.6.2/pure-min.css">
-    <link rel="stylesheet" href="pure/side-menu/css/layouts/side-menu.css">
+    <link rel="stylesheet" href="third/pure/pure-release-0.6.2/pure-min.css">
+    <link rel="stylesheet" href="third/pure/side-menu/css/layouts/side-menu.css">
     
-    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="third/font-awesome-4.7.0/css/font-awesome.min.css">
     
-    <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
-    <script type="text/javascript" src="js/layer-v2.4/layer/layer.js"></script>
+    <script type="text/javascript" src="third/js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="third/js/layer-v2.4/layer/layer.js"></script>
     
-    <link rel="stylesheet" href="bootstrap-3.3.5-dist/css/bootstrap.min.css">
-	<script type="text/javascript" src="bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="third/bootstrap-3.3.5-dist/css/bootstrap.min.css">
+	<script type="text/javascript" src="third/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 	
-	<script type="text/javascript" src="js/jqueryvalidate/jquery.validate.min.js"></script>
-	<script type="text/javascript" src="js/jqueryvalidate/messages_zh.js"></script>
+	<script type="text/javascript" src="third/js/jqueryvalidate/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="third/js/jqueryvalidate/messages_zh.js"></script>
 	
-	
+
+	<link rel="stylesheet" href="custom/css/custom.css">
 </head>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -39,12 +41,16 @@
 			$(this).addClass("fa fa-paper-plane-o");
 			var action = $(this).attr("action");
 			//alert(action);
+			var hasSecond = $(this).attr("for");
+			if(hasSecond!=undefined){
+				$(this).removeClass("fa fa-paper-plane-o");
+				$(this).addClass("fa fa-folder-o");
+			}
 			$(this).click(function(){
 				$(".pure-menu-list .pure-menu-link").removeClass("cus_active");
 				$(this).addClass("cus_active");
 				var hasSecond = $(this).attr("for");
 				if(hasSecond!=undefined){
-					$(this).removeClass("fa fa-paper-plane-o");
 					if($("#"+hasSecond).css("display")=="none"){
 						$("#"+hasSecond).show("normal");
 						$(this).removeClass("fa fa-folder-o");
@@ -57,7 +63,7 @@
 				}else{
 					if(action!= undefined){
 						$.ajax({
-							url:action,
+							url:action+"?t="+Math.random(),
 							type:"post",
 							success:function(data){
 								$("#main").html(data);
@@ -84,42 +90,12 @@
 		return m;
 	}
 
+	function logout(){
+		window.location.href="${basePath}/logout";
+	}
+
 </script>
-<style>
-<!--
-#menu{
-	background-color: #E6E6E6
-}
-#menu .pure-menu-selected, #menu .pure-menu-heading {
-    background: #3B3D3E;
-}
 
-.pure-menu-list li:HOVER{
-	cursor: auto;
-	/* background-color: #3B3D3E; */
-}
-
-.cus_active{
-	/* background-color: #3B3D3E; */
-	color: red;
-}
-
-.pure-menu-list-second{
-	margin-left: -20px;
-
-}
-ul li label{
-	width: 100%;
-}
-
-.header {
-    margin-bottom: 10px;
-    height: 100px;
-    background-color: lightslategray;
- }
- 
--->
-</style>
 <body>
 <div id="layout">
     <!-- Menu toggle -->
@@ -129,7 +105,7 @@ ul li label{
     </a>
     <div id="menu">
         <div class="pure-menu">
-            <label class="pure-menu-heading" >&nbsp;&nbsp;银河系</label>
+            <label class="pure-menu-heading" >&nbsp;&nbsp;后台管理系统</label>
 
             <ul class="pure-menu-list">
             	<c:forEach items="${menus }" var="menu">
@@ -154,48 +130,26 @@ ul li label{
             			</c:otherwise>
             		</c:choose>
             	</c:forEach>
-               <!--  <li class="pure-menu-item"><label href="javascript:;" class="pure-menu-link" action="app/mgr/user/list.action">用户</label></li>
-                <li class="pure-menu-item"><label href="javascript:;" class="pure-menu-link" action="app/mgr/right/list.action">权限</label></li>
-
-                <li class="pure-menu-item" class="menu-item-divided pure-menu-selected">
-                    <label href="javascript:;" class="pure-menu-link" for="second">1级菜单</label>
-                    <ul class="pure-menu-list-second" id="second" style="display: none;">
-		                <li class="pure-menu-item"><label href="javascript:;" class="pure-menu-link" action="app/mgr/user/list.action">2级菜单</label></li>
-		                <li class="pure-menu-item"><label href="javascript:;" class="pure-menu-link" action="app/mgr/right/list.action">2级菜单</label></li>
-		
-		                <li class="pure-menu-item" class="menu-item-divided pure-menu-selected">
-		                    <label href="javascript:;" class="pure-menu-link" for="third"> 2级菜单</label>
-		                    
-		                    <ul class="pure-menu-list-second" id="third" style="display: none;">
-				                <li class="pure-menu-item"><label href="javascript:;" class="pure-menu-link" action="app/mgr/user/list.action">3级菜单</label></li>
-				                <li class="pure-menu-item"><label href="javascript:;" class="pure-menu-link" action="app/mgr/right/list.action">3级菜单</label></li>
-				
-				                <li class="pure-menu-item" class="menu-item-divided pure-menu-selected">
-				                    <label href="javascript:;" class="pure-menu-link">3级菜单</label>
-				                </li>
-				
-				                <li class="pure-menu-item"><label href="javascript:;" class="pure-menu-link">3级菜单</label></li>
-				            </ul>
-		                </li>
-		
-		                <li class="pure-menu-item"><label href="javascript:;" class="pure-menu-link">2级菜单</label></li>
-		            </ul>
-                </li>
-                <li class="pure-menu-item"><label href="javascript:;" class="pure-menu-link">1级菜单</label></li> -->
-                <li class="pure-menu-item"><label href="logout" action="logout" class="pure-menu-link">退出</label></li>
+             <li class="pure-menu-item"><label onclick="logout()" class="pure-menu-link"> 退出</label></li>
             </ul>
         </div>
     </div>
 
     <div id="main">
       	<!-- 填充内容 -->
+      	<i class="fa fa-spinner fa-spin"></i>
+                        <i class="fa fa-circle-o-notch fa-spin"></i>
+                        <i class="fa fa-refresh fa-spin"></i>
+                        <i class="fa fa-cog fa-spin"></i>
+                        <i class="fa fa-spinner fa-pulse"></i>
+                        
+         <button class="cus_btn1"></button>               
+         <button style="width: 100px;height: 100px;border-radius:100px 0px;"></button>               
+         <button style="width: 100px;height: 100px;border-radius:0px 100px;"></button>               
+         <button style="width: 100px;height: 100px;border-radius:0px 50px;"></button>               
+         <button style="width: 100px;height: 100px;border-radius:0px 25px;"></button>               
     </div>
 </div>
-
-
-
-
-<script src="pure/side-menu/js/ui.js"></script>
-
+<script src="third/pure/side-menu/js/ui.js"></script>
 </body>
 </html>

@@ -1,0 +1,112 @@
+#menu {
+	background-image: url("../imgs/mgr_banner2.jpg");
+}
+
+#menu .pure-menu-selected,#menu .pure-menu-heading {
+	background: #584d5e;
+}
+
+.pure-menu-list li:HOVER {
+	cursor: auto;
+	/* background-color: #3B3D3E; */
+}
+
+.pure-menu-list-second {
+	margin-left: -20px;
+}
+
+.pure-menu-link {
+	color: #888888;
+}
+
+ul li label {
+	width: 100%;
+}
+
+table tr td {
+	text-align: center;
+}
+
+.header {
+	margin-bottom: 10px;
+	height: 50px;
+	/* 	background-color: lightslategray;
+	background-image: url("../imgs/mgr_banner2.jpg");
+	background-repeat: no-repeat;
+	background-position: 0 0; */
+}
+
+.cus_required {
+	color: red;
+}
+
+.cus_active { /* background-color: #3B3D3E; */
+	color: rgb(105, 185, 112);
+}
+
+.cus_tip {
+	background-color: rgb(230, 230, 230);
+	height: 120%;
+	border-radius: 5px 5px;
+	color: #3e443c;
+	margin-bottom: 10px;
+}
+
+.cus_page {
+	background-color: rgb(230, 230, 230);
+	height: 120%;
+	border-radius: 5px 5px;
+	color: gray;
+	margin-bottom: 10px;
+	text-align: center;
+	position: relative;
+}
+
+.cus_list_btn {
+	text-align: left;
+	margin-top: -25px;
+}
+
+#add_div {
+	border-left: 1px solid rgb(230, 230, 230);
+	border-right: 1px solid rgb(230, 230, 230);
+	min-height: 366px;
+}
+
+.button-error {
+	background: rgb(202, 60, 60); /* this is a maroon */
+	font-size: 50%;
+}
+
+.pure-form div {
+	margin-top: 2px;
+}
+
+.cus_btn1 {
+	width: 100px;
+	height: 100px;
+	border-radius: 50px 50px;
+	background: url('../imgs/mgr_banner2.jpg');
+	background-position: -1020px -115px;
+	text-shadow: 0px 5px 0px aqua;
+	border: 1px solid;
+}
+
+.cus_labels {
+	margin-top: 10px;
+}
+
+.cus_label {
+	border: 1px solid green;
+	min-width: 100px;
+	text-align: center;
+}
+
+.fa-toggle-on {
+	color: green;
+	cursor: pointer;
+}
+
+.fa-toggle-off {
+	cursor: pointer;
+}

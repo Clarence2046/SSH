@@ -36,4 +36,16 @@ public class JdbcServiceImpl implements IJdbcService {
 		return jdbcDao.getAllRoles();
 	}
 
+	public void addLabel(String name) {
+		jdbcDao.addLabel(name);
+	}
+
+	public void deleteLabel(Integer id) {
+		jdbcDao.deleteLabel(id);
+	}
+
+	public void updateBlog(Integer id, Object[] columns, Object[] params) {
+		jdbcDao.updateBlog(id, columns, params);
+	}
+
 }

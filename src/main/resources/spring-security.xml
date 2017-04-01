@@ -12,11 +12,8 @@
 	<security:http security="none" pattern="/login.jsp"></security:http>
 	<security:http security="none" pattern="/login_error.jsp"></security:http>
 	<security:http security="none" pattern="/login_fail.jsp"></security:http>
-	<security:http security="none" pattern="/pure/**"></security:http>
-	<security:http security="none" pattern="/js/**"></security:http>
-	<security:http security="none" pattern="/imgs/**"></security:http>
-	<security:http security="none" pattern="/font-awesome-4.7.0/**"></security:http>
-	<security:http security="none" pattern="/bootstrap-3.3.5-dist/**"></security:http>
+	<security:http security="none" pattern="/custom/**"></security:http>
+	<security:http security="none" pattern="/third/**"></security:http>
 
 
 	<security:http auto-config="false" use-expressions="false" >
@@ -41,7 +38,7 @@
 							  username-parameter="username"
 							  password-parameter="password"
 							  default-target-url="/app/mgr/index"
-							  authentication-failure-url="/login_fail.jsp"
+							  authentication-failure-url="/login.jsp?ERROR_LOGIN_PASSWORD_OR_ACCOUNT=159268452"
 							  />
 		<!-- 在退出登陆时，删除对应的session信息，避免session信息失效后重新登录，任然会使用之前的sessionid进行验证请求，会报告session超时 -->
 		<security:logout invalidate-session="true" logout-url="/logout"  delete-cookies="JSESSIONID"/>

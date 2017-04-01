@@ -23,49 +23,7 @@
 <script type="text/javascript">
 
 </script>
-<style>
-<!--
-.button-error{
-background: rgb(202, 60, 60); /* this is a maroon */
-font-size: 50%;
-}
 
-.pure-form div{
-	margin-top: 2px;
-}
-
-.cus_tip{
-	background-color: rgb(230, 230, 230);
-	height: 120%;
-	border-radius:5px  5px; 
-	color: #44D61F;
-	margin-bottom: 10px;
-}
-.cus_page{
-	background-color: rgb(230, 230, 230);
-	height: 120%;
-	border-radius:5px  5px; 
-	color: gray;
-	margin-bottom: 10px;
-	text-align: center;
-	position: relative;
-}
-
-#add_div{
-	border-left: 1px solid rgb(230, 230, 230);
-	border-right: 1px solid rgb(230, 230, 230);
-	min-height: 366px;
-}
-
-.cus_required{
-	color: red;
-}
-
-.header{
-	margin-bottom: 10px;
-}
--->
-</style>
 <body>
 		<script type="text/javascript">
 			$(document).ready(function() {

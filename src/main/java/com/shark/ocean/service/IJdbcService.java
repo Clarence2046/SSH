@@ -11,10 +11,14 @@ public interface IJdbcService {
 	public void saveRoleRights(String roleId, String[] rightIds);
 
 	public List<Map<String, String>> getBySql(String sql);
-	
-	public List<MenuUtil>  getAllRoles();
-	
-	public void saveUserRoles(String userId,String[] roleIds);
 
+	public List<MenuUtil> getAllRoles();
 
+	public void saveUserRoles(String userId, String[] roleIds);
+
+	public void addLabel(String name);
+
+	public void deleteLabel(Integer id);
+	
+	public void updateBlog(Integer id,Object[] columns,Object[] params);
 }

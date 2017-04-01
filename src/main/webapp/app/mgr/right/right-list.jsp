@@ -122,7 +122,7 @@
 
 	function reloadList() {
 		$.ajax({
-			url : "app/mgr/right/list.action?t=" + Math.random(),
+			url : "app/mgr/right/list.action?pageRequest.page=${result.page}&t=" + Math.random(),
 			type : "post",
 			success : function(data) {
 				$("#main").html(data);
@@ -164,54 +164,12 @@
 	}
 	
 </script>
-<style>
-<!--
-.button-error{
-background: rgb(202, 60, 60); /* this is a maroon */
-font-size: 50%;
-}
 
-.pure-form div{
-	margin-top: 2px;
-}
-
-.cus_tip{
-	background-color: rgb(230, 230, 230);
-	height: 120%;
-	border-radius:5px  5px; 
-	color: #44D61F;
-	margin-bottom: 10px;
-}
-.cus_page{
-	background-color: rgb(230, 230, 230);
-	height: 120%;
-	border-radius:5px  5px; 
-	color: gray;
-	margin-bottom: 10px;
-	text-align: center;
-	position: relative;
-}
-
-#add_div{
-	border-left: 1px solid rgb(230, 230, 230);
-	border-right: 1px solid rgb(230, 230, 230);
-	min-height: 366px;
-}
-
-.cus_required{
-	color: red;
-}
-
-.header{
-	margin-bottom: 10px;
-}
--->
-</style>
 <body>
 
 	<div class="header">
-		<div align="left">
-			<a  onclick="goAddUser()" class="btn btn-success btn-md"><label class="fa fa-user fa-lg"></label> 添加权限</a>
+		<div class="cus_list_btn">
+			<a  onclick="goAddUser()" class="btn btn-success btn-sm"><label class="fa fa-mortar-board fa-lg"></label> 添加权限</a>
 			<a id="backBtn"  onclick="backUser()" class="btn btn-primary"><label class="fa fa-mail-reply"></label> 返回</a>
 		</div>
 	</div>
@@ -220,7 +178,7 @@ font-size: 50%;
 		<div class="cus_tip">
 			<label > 系统权限列表 </label>
 		</div>
-		<table  class="table table-striped">
+		<table  class="table table-striped table-bordered">
 			<tr>
 				<td>编号</td>
 				<td>父权限编号</td>
@@ -246,49 +204,10 @@ font-size: 50%;
 				</tr>
 			</c:forEach>
 		</table>
-		<div class="cus_page">
-			<div style="float: left;margin-left: 20px;">
-				<label class="btn btn-sm fa fa-fast-backward" onclick="gotopage(${result.firstPage})"></label>
-				&nbsp;&nbsp;&nbsp;&nbsp;
-				<label class="btn btn-sm fa fa-step-backward" onclick="gotopage(${result.prePage})"></label>
-			</div>
-			<label>
-					  当前${result.page }页/共${result.totalPage }页
-					  每页
-					 <select name="pageSize" onchange="gotopage(1)">
-					 	<option value="5" <c:if test="${result.pageSize==5 }">selected</c:if>>5</option>
-					 	<c:forEach begin="2" end="8" step="2" var="t">
-					 		${t }
-						 	<option value="${t*5 }" <c:if test="${result.pageSize==(t*5) }">selected</c:if>>${t * 5 }</option>
-					 	</c:forEach>
-					 </select> 
-					  条
-					  /共${result.size }条
-			
-			</label>
-			<div style="float: right;margin-right: 20px;">
-				<label class="btn btn-sm fa fa-step-forward" onclick="gotopage(${result.nextPage})"></label>
-				&nbsp;&nbsp;&nbsp;&nbsp;
-				<label class="btn btn-sm fa fa-fast-forward" onclick="gotopage(${result.lastPage})"></label>
-			</div>
-			<script type="text/javascript">
-				function gotopage(page){
-					var size = 10;
-					var psize = $("select[name=pageSize]").val();
-					if(psize){
-						size = psize;
-					}
-					$.ajax({
-						url:queryUrl,
-						type:"post",
-						data:{"pageRequest.pageSize":size,"pageRequest.page":page},
-						success:function(data){
-							$("#main").html(data);
-						}
-					});
-				}
-			</script>
-		</div>
+		<!-- 引入分页栏 -->
+		<jsp:include page="../common/page.jsp">
+			<jsp:param value="app/mgr/right/list" name="queryurl"/>
+		</jsp:include>
 	</div>
 	<div id="add_div" class="content">
 		<div class="cus_tip">

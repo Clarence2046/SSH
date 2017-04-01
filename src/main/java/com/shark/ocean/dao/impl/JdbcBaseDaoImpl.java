@@ -3,7 +3,6 @@ package com.shark.ocean.dao.impl;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +11,7 @@ import javax.sql.DataSource;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.ConnectionCallback;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
@@ -146,6 +146,59 @@ public class JdbcBaseDaoImpl extends JdbcDaoSupport implements IJdbcBaseDao {
 			}
 		});
 		return menus;
+	}
+
+	
+	/**
+	 * 添加标签
+	 */
+	public void addLabel(String name) {
+		try {
+			String sql = "insert into ocean_label (name) values (?)";
+			getJdbcTemplate().update(sql, name);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+
+	/**
+	 * 删除标签
+	 */
+	public void deleteLabel(Integer id) {
+		try {
+			String sql = "delete from  ocean_label where id=?";
+			getJdbcTemplate().update(sql, id);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+
+	public void updateBlog(Integer id, Object[] columns, Object[] params) {
+		try {
+			Object[] values = new Object[params.length+1];
+			StringBuilder sb = new StringBuilder("update ocean_blog set ");
+			
+			for (int i = 0; i < columns.length; i++) {
+				sb.append(columns[i]).append("=?");
+				if(i<columns.length-1){
+					sb.append(",");
+				}
+				values[i] = params[i];
+			}
+			sb.append(" where id=?");
+			System.out.println("更新语句:"+sb.toString());
+			values[params.length] = id;
+			
+			getJdbcTemplate().update(sb.toString(), values);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	
 	}
 
 	

@@ -55,6 +55,10 @@ public class BaseDaoImpl<T> implements IBaseDao<T> {
 	public List<T> getAll() {
 		Criteria criteria = getSession().createCriteria(entityName);
 		List list = criteria.list();
+		return decorate(list);
+	}
+
+	protected List<T> decorate(List list) {
 		return list;
 	}
 
