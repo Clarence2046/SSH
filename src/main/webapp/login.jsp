@@ -3,14 +3,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>Insert title here</title>
-	<link rel="stylesheet" href="third/pure/pure-release-0.6.2/pure-min.css">
-	<link rel="stylesheet" href="third/pure/side-menu/css/layouts/side-menu.css">
-	<link rel="stylesheet" href="third/font-awesome-4.7.0/css/font-awesome.min.css">
-	<script type="text/javascript" src="third/js/jquery-1.10.2.min.js"></script>
-	<link rel="stylesheet" href="third/bootstrap-3.3.5-dist/css/bootstrap.min.css">
-	<script type="text/javascript" src="third/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="third/pure/pure-release-0.6.2/pure-min.css">
+<link rel="stylesheet"
+	href="third/pure/side-menu/css/layouts/side-menu.css">
+<link rel="stylesheet"
+	href="third/font-awesome-4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src="third/js/jquery-1.10.2.min.js"></script>
+<link rel="stylesheet"
+	href="third/bootstrap-3.3.5-dist/css/bootstrap.min.css">
+<script type="text/javascript"
+	src="third/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 </head>
 <style>
 <!--
@@ -34,11 +38,10 @@ html,body {
 	border-top: 1px solid #777777;
 }
 
-
 .login_banner {
-	width: 274px;
+	width: 284px;
 	height: 40px;
-	border-radius: 0px 14px;
+	border-radius: 14px 14px 0px 0px;
 	margin-left: -12px;
 	border: 3px solid white;
 }
@@ -50,11 +53,20 @@ html,body {
 	font-weight: bold;
 }
 
-.login_form{
+.login_form {
 	z-index: 9999;
+	width: 261px;
+	border-left-width: 5px;
+	border-left-style: dashed;
+	border-right-width: 5px;
+	border-right-style: dashed;
+	border-bottom-style: solid;
+	border-bottom-width: 20px;
+	border-bottom-color: #8734f7;;
+	position: absolute;
 }
 
-.login_bg{
+.login_bg {
 	background-color: white;
 }
 
@@ -63,18 +75,32 @@ html,body {
 	top: 30%;
 	left: 42%;
 }
+
+.parallelogram {
+    width: 300px;
+    height: 100px;
+    margin-top: 120px;
+    margin-left: -20px;
+    background: #8734f7;
+    -webkit-transform: skew(-30deg);
+    -moz-transform: skew(-30deg);
+    -o-transform: skew(-30deg);
+    transform: skew(-30deg);
+}  
 -->
 </style>
 <script type="text/javascript">
-$(document).ready(function(){
-	var errors = '${param.ERROR_LOGIN_PASSWORD_OR_ACCOUNT}';
-	console.log(errors);
-	if(errors!=undefined && errors.length>0){
-		$("#login_error").html("<label style='color:red;margin:0;'>账号或密码错误</label>");
-	}
-});
-
-
+	$(document)
+			.ready(
+					function() {
+						var errors = '${param.ERROR_LOGIN_PASSWORD_OR_ACCOUNT}';
+						console.log(errors);
+						if (errors != undefined && errors.length > 0) {
+							$("#login_error")
+									.html(
+											"<label style='color:red;margin:0;'>账号或密码错误</label>");
+						}
+					});
 </script>
 
 <body class="back">
@@ -94,28 +120,32 @@ $(document).ready(function(){
 					<tr>
 						<td>
 							<div class="input-group margin-bottom-sm">
-							  <span class="input-group-addon"><i class="fa fa-user-o fa-fw"></i></span>
-							  <input class="form-control" name="username" type="text" placeholder="用户名">
+								<span class="input-group-addon"><i
+									class="fa fa-user-o fa-fw"></i></span> <input class="form-control"
+									name="username" type="text" placeholder="用户名">
 							</div>
 						</td>
 					</tr>
 					<tr>
 						<td>
 							<div class="input-group">
-							  <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
-							  <input class="form-control" type="password" name="password" placeholder="密码">
+								<span class="input-group-addon"><i
+									class="fa fa-key fa-fw"></i></span> <input class="form-control"
+									type="password" name="password" placeholder="密码">
 							</div>
 						</td>
 					</tr>
-					
+
 					<tr style="margin-top: 3px;">
-						<td align="center">
-							<input type="submit" class="pure-button" value=" 登录 " /> 
-							<input type="reset" class="pure-button" value=" 重置 " />
-						</td>
+						<td align="center"><input type="submit" class="pure-button"
+							value=" 登录 " /> <input type="reset" class="pure-button"
+							value=" 重置 " /></td>
 					</tr>
 				</table>
 			</form>
+		</div>
+		<div class="parallelogram">
+		
 		</div>
 	</div>
 
