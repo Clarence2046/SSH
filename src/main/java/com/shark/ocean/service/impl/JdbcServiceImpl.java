@@ -44,7 +44,7 @@ public class JdbcServiceImpl implements IJdbcService {
 		jdbcDao.deleteLabel(id);
 	}
 
-	public void updateBlog(Integer id, Object[] columns, Object[] params) {
+	public void updateBlog(Long id, Object[] columns, Object[] params) {
 		jdbcDao.updateBlog(id, columns, params);
 	}
 

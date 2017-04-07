@@ -178,7 +178,7 @@ public class JdbcBaseDaoImpl extends JdbcDaoSupport implements IJdbcBaseDao {
 	}
 
 
-	public void updateBlog(Integer id, Object[] columns, Object[] params) {
+	public void updateBlog(Long id, Object[] columns, Object[] params) {
 		try {
 			Object[] values = new Object[params.length+1];
 			StringBuilder sb = new StringBuilder("update ocean_blog set ");

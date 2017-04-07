@@ -38,4 +38,9 @@ public class RoleServiceImpl implements IRoleService {
 
 		return roleDao.getByField(fieldName, fieldValue);
 	}
+
+	public List<Role> getByField(String fieldName, Object fieldValue,
+			String[] orderBy, boolean[] descs) {
+		return roleDao.getByField(fieldName, fieldValue, orderBy, descs);
+	}
 }

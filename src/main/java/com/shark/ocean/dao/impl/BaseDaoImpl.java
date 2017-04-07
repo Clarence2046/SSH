@@ -10,6 +10,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Expression;
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -72,6 +73,41 @@ public class BaseDaoImpl<T> implements IBaseDao<T> {
 			Class<?> type = field.getType();
 			System.out.println(type.getSimpleName());
 			if (StringUtils.isNoneEmpty(fieldValue.toString())) {
+				if ("Long".equals(type.getSimpleName())) {
+					criteria = criteria.add(Expression.eq(fieldName,
+							Long.valueOf(fieldValue.toString())));
+
+				}else if ( "Integer".equals(type.getSimpleName())) {
+					criteria = criteria.add(Expression.eq(fieldName,
+							Integer.valueOf(fieldValue.toString())));
+
+				}  else {
+					criteria = criteria.add(Expression.like(fieldName,
+							fieldValue.toString()));
+				}
+			}
+			
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (NoSuchFieldException e) {
+			e.printStackTrace();
+		}
+
+		List list = criteria.list();
+		return decorate(list);
+	}
+	
+	public List<T> getByField(String fieldName, Object fieldValue,
+			String[] orderBy, boolean[] descs) {
+		Session session = getSessionFactory().getCurrentSession();
+		Criteria criteria = session.createCriteria(entityName);
+
+		// 获取当前实体，当前字段类型？ 怎么获取？
+		try {
+			Field field = entityClass.getDeclaredField(fieldName);
+			Class<?> type = field.getType();
+			System.out.println(type.getSimpleName());
+			if (StringUtils.isNoneEmpty(fieldValue.toString())) {
 				if ("Long".equals(type.getSimpleName())
 						|| "Integer".equals(type.getSimpleName())) {
 					criteria = criteria.add(Expression.eq(fieldName,
@@ -82,6 +118,18 @@ public class BaseDaoImpl<T> implements IBaseDao<T> {
 							fieldValue.toString()));
 				}
 			}
+			if(orderBy!=null && orderBy.length>0){
+				for (int i = 0; i < orderBy.length; i++) {
+					String orderByField = orderBy[i];
+					boolean desc = descs[i];
+					if(desc){
+						criteria.addOrder(Order.desc(orderByField));
+					}else{
+						criteria.addOrder(Order.asc(orderByField));
+					}
+				}
+			}
+			
 		} catch (SecurityException e) {
 			e.printStackTrace();
 		} catch (NoSuchFieldException e) {
@@ -89,7 +137,7 @@ public class BaseDaoImpl<T> implements IBaseDao<T> {
 		}
 
 		List list = criteria.list();
-		return list;
+		return decorate(list);
 	}
 
 	public void delete(T entity) {
@@ -103,4 +151,6 @@ public class BaseDaoImpl<T> implements IBaseDao<T> {
 			e.printStackTrace();
 		}
 	}
+
+	
 }

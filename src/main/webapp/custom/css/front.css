@@ -1,0 +1,45 @@
+.cus_commenttip{
+	color: gray;
+    font-size: 10px;
+    float: right;
+    margin-right: 10px;
+}
+
+.cus_line{
+	border-bottom: 1px solid #eee;
+	background-color: lightsteelblue;
+	height: 25px;
+}
+.cus_comment{
+	
+	border-bottom: 1px solid #eee;
+	margin-bottom: 10px;
+}
+
+.cus_comment_list{
+	margin-bottom: 10px;
+}
+.cus_comment_head label{
+	margin-bottom: 0px;
+}
+.cus_comment_head{
+	border-top: 1px solid #eee;
+	border-bottom: 1px solid #eee;
+	color: gray;
+    font-size: small;
+}
+.cus_comment_detail{
+	min-height: 50px;
+	font-size: 12px;
+}
+
+.cus_comment_action{
+	text-align: right;
+}
+.cus_comment_action a:HOVER{
+	cursor: pointer;
+}
+.cus_comment_form{
+	/* border: 1px solid #eee; */
+}
+

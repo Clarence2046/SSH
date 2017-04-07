@@ -110,3 +110,13 @@ table tr td {
 .fa-toggle-off {
 	cursor: pointer;
 }
+
+.cus_label_btn{
+	background-color: #c5cccc;
+}
+
+.active{
+	background-color: rgb(40, 119, 46);
+    color: white;
+	
+}

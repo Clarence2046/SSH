@@ -10,6 +10,7 @@ public interface IBaseDao<T> {
 	public List<T> getAll();
 
 	public List<T> getByField(String fieldName, Object fieldValue);
+	public List<T> getByField(String fieldName, Object fieldValue,String[] orderBy,boolean[] descs);
 
 	public void delete(T entity);
 }

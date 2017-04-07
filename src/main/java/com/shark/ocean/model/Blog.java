@@ -2,6 +2,7 @@ package com.shark.ocean.model;
 
 import java.sql.Blob;
 import java.util.Date;
+import java.util.List;
 
 public class Blog {
 	private Long id;
@@ -25,6 +26,42 @@ public class Blog {
 	private Integer visible;
 
 	private Integer lockComment;
+
+	private String labels;
+
+	private String description;
+	private Integer views;
+
+	public Integer getViews() {
+		return views;
+	}
+
+	public void setViews(Integer views) {
+		this.views = views;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String[] getLabelsList() {
+		if (labels == null) {
+			return null;
+		}
+		return labels.split(",");
+	}
+
+	public String getLabels() {
+		return labels;
+	}
+
+	public void setLabels(String labels) {
+		this.labels = labels;
+	}
 
 	public Blob getBlobContent() {
 		return blobContent;

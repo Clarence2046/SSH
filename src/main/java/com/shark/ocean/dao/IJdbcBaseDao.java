@@ -26,7 +26,7 @@ public interface IJdbcBaseDao {
 	 * @param columns  更新字段
 	 * @param params  字段对应参数
 	 */
-	public void updateBlog(Integer id,Object[] columns,Object[] params);
+	public void updateBlog(Long id,Object[] columns,Object[] params);
 	
 	
 }

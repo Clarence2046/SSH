@@ -42,9 +42,28 @@ window.UEDITOR_HOME_URL = "${basepath}/third/ueditor1.4.3.3/";
 		    </div>
 		  </div>
 		  <div class="form-group">
-		    <label for="blog_subtitle"  class="col-sm-2 control-label">标签</label>
-		   	<div class="col-sm-10">
-		    	
+		    	<label for="blog_labels"  class="col-sm-2 control-label">标签</label>
+		   		<div class="col-sm-10" id="mylabels">
+			    	<c:forEach items="${labels }" var="label">
+	    				<c:set value="false" var="choosedlabel"></c:set>
+			    		<c:forEach items="${blog.labelsList }" var="haslabel">
+			    			<c:if test="${haslabel eq label['name'] }">
+			    				<c:set value="true" var="choosedlabel"></c:set>
+			    			</c:if>
+			    		</c:forEach>
+			    		<c:if test="${choosedlabel }">
+				    		<span class="btn btn-sm cus_label_btn active" onclick="chooseLabel(this,'${label['id'] }')" id="label_${label['name'] }">${label['name'] }</span>
+			    		</c:if>
+			    		<c:if test="${!choosedlabel }">
+				    		<span class="btn btn-sm cus_label_btn" onclick="chooseLabel(this,'${label['id'] }')" id="label_${label['name'] }">${label['name'] }</span>
+			    		</c:if>
+			    	</c:forEach>
+		    	</div>
+		  </div>
+		  <div class="form-group">
+		    <label for="blog_description"  class="col-sm-2 control-label">摘要</label>
+		   	<div class="col-sm-10" >
+		    	<textarea style="width: 100%;height: 100px;resize:none;" id="blog_description" name="entity.description" placeholder="摘要是用来在前台文章展示介绍的">${blog.description }</textarea>
 		    </div>
 		  </div>
 		  <div class="form-group">
@@ -88,12 +107,19 @@ window.UEDITOR_HOME_URL = "${basepath}/third/ueditor1.4.3.3/";
 				return;
 			}
 			var content= ue.getContent();
-			
+			var labelnames = "";
+			//获取选中的labels
+			$("#mylabels").find(".active").each(function(){
+				labelnames+=$(this).attr("id").substr(6)+",";
+			});
+			labelnames = labelnames.substr(0,labelnames.length-1);
 			var params = {};
 			params["entity.title"] = title;
 			params["entity.subTitle"] = subtitle;
 			params["content"] = content;
 			params["entity.id"] = $("#blogId").val();
+			params["entity.labels"] = labelnames;
+			params["entity.description"] = $("#blog_description").val();
 			
 			$.ajax({
 				url:url,
@@ -116,6 +142,13 @@ window.UEDITOR_HOME_URL = "${basepath}/third/ueditor1.4.3.3/";
 		}
 		function saveAndPublish(){
 		
+		}
+		function chooseLabel(ele,labelId){
+			if($(ele).hasClass("active")){
+				$(ele).removeClass("active");
+			}else{
+				$(ele).addClass("active");
+			}
 		}
 	</script>
 </body>

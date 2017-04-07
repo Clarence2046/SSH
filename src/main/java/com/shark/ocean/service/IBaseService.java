@@ -10,4 +10,6 @@ public interface IBaseService<T> {
 	public void delete(T entity);
 
 	public List<T> getByField(String fieldName, Object fieldValue);
+	
+	public List<T> getByField(String fieldName, Object fieldValue,String[] orderBy,boolean[] descs);
 }

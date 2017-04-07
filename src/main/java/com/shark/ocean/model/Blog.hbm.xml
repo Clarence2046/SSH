@@ -56,6 +56,9 @@
         <property name="modifyDate" column="modifyDate"/>    
         <property name="visible" column="visible"/>    
         <property name="lockComment" column="lockComment"/>    
+        <property name="labels" column="labels"/>    
+        <property name="description" column="description"/>    
+        <property name="views" column="views"/>    
             
         <!--     
             组件映射：把多个属性打包在一起当一个属性使用，用来把类的粒度变小。    

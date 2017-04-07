@@ -134,7 +134,34 @@
 		});
 	}
 	
+	function deleteBlog(id) {
+		layer.confirm("你确定要删除吗？",function(){
+			$.ajax({
+				url : "app/mgr/blog/delete.action?t=" + Math.random(),
+				type : "post",
+				data : {
+					"entity.id" : id
+				},
+				success : function(data) {
+					var ret = JSON.parse(data);
+					if (ret) {
+						layer.alert("删除成功！",function(){
+							reloadList();
+							layer.closeAll();
+						});
+					} else {
+						alert("删除失败!");
+					}
+				},
+				complete : function(xhr, textStatus) {
+					if (xhr.status == 403) {
+						alert("权限不足");
+					}
+				}
 	
+			});
+		});
+	}
 </script>
 
 <body>
@@ -158,6 +185,7 @@
 				<td style="width: 15%">修改时间</td>
 				<td style="width: 8%">前台可见</td>
 				<td style="width: 8%">评论启闭</td>
+				<td style="width: 8%">操作</td>
 			</tr>
 			<c:forEach items="${result.pageList }" var="vo">
 				<tr>
@@ -184,6 +212,10 @@
 						<label class="fa fa-toggle-off fa-2x" onclick="swichLockComment(this,'${vo.id}')"></label>
 						</c:if>
 					
+					</td>
+					<td >
+						<a class="btn btn-danger btn-sm glyphicon glyphicon-trash"  style="border-radius:15px 15px;" onclick="deleteBlog('${vo.id }')">
+						</a>
 					</td>
 				</tr>
 			</c:forEach>

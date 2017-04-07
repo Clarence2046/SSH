@@ -37,4 +37,9 @@ public class BaseServiceImpl<T> implements IBaseService<T> {
 		baseDao.update(entity);
 	}
 
+	public List<T> getByField(String fieldName, Object fieldValue,
+			String[] orderBy, boolean[] descs) {
+		return baseDao.getByField(fieldName, fieldValue, orderBy, descs);
+	}
+
 }

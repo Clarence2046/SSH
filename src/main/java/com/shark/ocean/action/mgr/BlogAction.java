@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
@@ -55,14 +56,20 @@ public class BlogAction extends BaseAction {
 
 	@Action(value = "/app/mgr/blog/addpage", results = { @Result(name = SUCCESS, location = "/app/mgr/blog/blog-add.jsp") })
 	public String goAddBlog() {
-
+		//查询所有标签
+		List<Map<String, String>> labels = jdbcService.getBySql("select * from ocean_label");
+		request.setAttribute("labels", labels);
+		
+		
 		return SUCCESS;
 	}
 	@Action(value = "/app/mgr/blog/editpage", results = { @Result(name = SUCCESS, location = "/app/mgr/blog/blog-edit.jsp") })
 	public String goEditBlog() {
 		Blog blog = blogService.getBlog(entity);
 		request.setAttribute("blog", blog);
-		
+		//查询所有标签
+		List<Map<String, String>> labels = jdbcService.getBySql("select * from ocean_label");
+		request.setAttribute("labels", labels);
 		return SUCCESS;
 	}
 	
@@ -73,6 +80,8 @@ public class BlogAction extends BaseAction {
 			String content = request.getParameter("content");
 			String title = entity.getTitle();
 			String subTitle = entity.getSubTitle();
+			String description = entity.getDescription();
+			String labels = entity.getLabels();
 			
 			byte[] bytes = content.getBytes();
 			Blog blog = blogService.getBlog(entity);
@@ -83,6 +92,8 @@ public class BlogAction extends BaseAction {
 			blog.setSubTitle(subTitle);
 			blog.setContent(bytes);
 			blog.setModifyDate(new Date());
+			blog.setDescription(description);
+			blog.setLabels(labels);
 			
 			blogService.saveOrUpdateBlog(blog);
 			
@@ -98,7 +109,7 @@ public class BlogAction extends BaseAction {
 		try {
 			String id = request.getParameter("id");
 			String visible = request.getParameter("visible");
-			jdbcService.updateBlog(Integer.valueOf(id),new String[] { "visible" }, new String[] { visible });
+			jdbcService.updateBlog(Long.valueOf(id),new String[] { "visible" }, new String[] { visible });
 			result = true;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -111,7 +122,7 @@ public class BlogAction extends BaseAction {
 		try {
 			String id = request.getParameter("id");
 			String lock = request.getParameter("lock");
-			jdbcService.updateBlog(Integer.valueOf(id),new Object[] { "lockComment" }, new Object[] { lock });
+			jdbcService.updateBlog(Long.valueOf(id),new Object[] { "lockComment" }, new Object[] { lock });
 			result = true;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -140,6 +151,18 @@ public class BlogAction extends BaseAction {
 		return SUCCESS;
 	}
 	
+	@Action(value = "/app/mgr/blog/delete", results = { @Result(name = SUCCESS,type="json", params={"root","result"})})
+	public String deleteBlog() {
+		try {
+			blogService.delete(entity);
+			result = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return SUCCESS;
+	}
+	
 	/**
 	 * *********************************************************************
 	 *  标签管理
@@ -157,6 +180,21 @@ public class BlogAction extends BaseAction {
 		try {
 			String name = request.getParameter("labelName");
 			jdbcService.addLabel(name  );
+			result = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return SUCCESS;
+	}
+	@Action(value = "/app/mgr/blog/labeldelete", results = { @Result(name = SUCCESS,type="json", params={"root","result"})})
+	public String deleteLabel() {
+		try {
+			String id = request.getParameter("labelId");
+			if(StringUtils.isEmpty(id)){
+				return SUCCESS;
+			}
+			jdbcService.deleteLabel(Integer.valueOf(id));
 			result = true;
 		} catch (Exception e) {
 			e.printStackTrace();

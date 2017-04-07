@@ -73,7 +73,7 @@
 		});
 	}
 	function deleteUser(id) {
-		if(confirm("你确定要删除吗？")){
+		layer.confirm("你确定要删除吗？",function(){
 			$.ajax({
 				url : "app/mgr/user/delete.action?t=" + Math.random(),
 				type : "post",
@@ -83,10 +83,12 @@
 				success : function(data) {
 					var ret = JSON.parse(data);
 					if (ret) {
-						alert("删除成功！");
-						reloadList();
+						layer.alert("删除成功！",function(){
+							layer.closeAll();
+							reloadList();
+						});
 					} else {
-						alert("删除失败!");
+						layer.alert("删除失败!");
 					}
 				},
 				complete : function(xhr, textStatus) {
@@ -96,8 +98,8 @@
 				}
 	
 			});
-		}
-	
+		
+		});
 	}
 
 	function reloadList() {

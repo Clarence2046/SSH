@@ -14,6 +14,7 @@
 	<security:http security="none" pattern="/login_fail.jsp"></security:http>
 	<security:http security="none" pattern="/custom/**"></security:http>
 	<security:http security="none" pattern="/third/**"></security:http>
+	<security:http security="none" pattern="/app/front/**"></security:http>
 
 
 	<security:http auto-config="false" use-expressions="false" >

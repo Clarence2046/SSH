@@ -20,5 +20,5 @@ public interface IJdbcService {
 
 	public void deleteLabel(Integer id);
 	
-	public void updateBlog(Integer id,Object[] columns,Object[] params);
+	public void updateBlog(Long id,Object[] columns,Object[] params);
 }

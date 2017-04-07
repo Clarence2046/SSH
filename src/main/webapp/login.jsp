@@ -24,13 +24,13 @@ html,body {
 }
 
 .back {
-	background: -webkit-linear-gradient(#efe4e4, #3C3F56);
+	background: -webkit-linear-gradient(rgba(1, 26, 33, 0.68), #2d2f2d);
 	/* Safari 5.1 - 6.0 */
-	background: -o-linear-gradient(#efe4e4, #3C3F56);
+	background: -o-linear-gradient(rgba(1, 26, 33, 0.68), #2d2f2d);
 	/* Opera 11.1 - 12.0 */
-	background: -moz-linear-gradient(#efe4e4, #3C3F56);
+	background: -moz-linear-gradient(rgba(1, 26, 33, 0.68), #2d2f2d);
 	/* Firefox 3.6 - 15 */
-	background: linear-gradient(#efe4e4, #3C3F56); /* 标准的语法（必须放在最后） */
+	background: linear-gradient(rgba(1, 26, 33, 0.68), #2d2f2d); /* 标准的语法（必须放在最后） */
 	background-size: cover;
 }
 
@@ -39,15 +39,16 @@ html,body {
 }
 
 .login_banner {
-	width: 284px;
-	height: 40px;
+	width: 311px;
+	height: 50px;
 	border-radius: 14px 14px 0px 0px;
-	margin-left: -12px;
+	text-align:center;
+	margin-left:-25px;
 	border: 3px solid white;
 }
 
 .login_banner .login_title {
-	margin-left: 25px;
+	margin-left: 0px;
 	font-size: x-large;
 	font-style: normal;
 	font-weight: bold;
@@ -62,7 +63,7 @@ html,body {
 	border-right-style: dashed;
 	border-bottom-style: solid;
 	border-bottom-width: 20px;
-	border-bottom-color: #8734f7;;
+	border-bottom-color: #121213;;;
 	position: absolute;
 }
 
@@ -72,21 +73,75 @@ html,body {
 
 .login_div {
 	position: absolute;
-	top: 30%;
-	left: 42%;
+	top: 26%;
+	left: 41%;
 }
 
 .parallelogram {
     width: 300px;
     height: 100px;
+    background: #121213;
+    margin-left:20px;
+    margin-top:5px;
+    -webkit-transform: skew(-0deg);
+    -moz-transform: skew(-0deg);
+    -o-transform: skew(-0deg);
+    transform: skew(-0deg);
+}  
+.parallelogram_1 {
+    width: 340px;
+    height: 120px;
     margin-top: 120px;
-    margin-left: -20px;
-    background: #8734f7;
+    margin-left: -45px;
+    background: #4f5165;
     -webkit-transform: skew(-30deg);
     -moz-transform: skew(-30deg);
     -o-transform: skew(-30deg);
     transform: skew(-30deg);
+    position: absolute;
+    border-radius:15px 15px; 
+    box-shadow:5px 6px 5px;
 }  
+
+.right_trangle{
+    width: 0px;
+    height: 0px;
+    /* border-left: 10px solid red; */
+    border: 25px solid;
+    margin-left: 283px;
+    /* border-right: 10px solid red; */
+    /* border-bottom-width: 10px; */
+    border-bottom-color: yellow;
+    border-top-color: blue;
+    border-left-color: #807c7c;
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    float: right;
+    margin-top: -16px;
+    position: absolute;
+    z-index: -10;
+}
+.left_trangle{
+    width: 0px;
+    height: 0px;
+    /* border-left: 10px solid red; */
+    border: 25px solid;
+    margin-left: -27px;
+    /* border-right: 10px solid red; */
+    /* border-bottom-width: 10px; */
+    border-bottom-color: yellow;
+    border-top-color: blue;
+    border-left-color: transparent;
+    border-top-color: transparent;
+    border-right-color: #696a6b;
+    border-bottom-color: transparent;
+    float: right;
+    margin-top: -16px;
+    position: absolute;
+    z-index: -10;
+}
+
 -->
 </style>
 <script type="text/javascript">
@@ -107,6 +162,10 @@ html,body {
 	<div class="login_div">
 		<div class="login_banner login_bg">
 			<label class="login_title">后台管理系统</label>
+			<div class="left_trangle">
+			</div>
+			<div class="right_trangle">
+			</div>
 		</div>
 		<div class="login_form login_bg">
 			<form class="pure-form " action="login.action" method="post">
@@ -144,8 +203,9 @@ html,body {
 				</table>
 			</form>
 		</div>
-		<div class="parallelogram">
-		
+		<div class="parallelogram_1">
+			<div class="parallelogram">
+			</div>
 		</div>
 	</div>
 

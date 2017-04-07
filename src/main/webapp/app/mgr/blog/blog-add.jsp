@@ -41,9 +41,17 @@ window.UEDITOR_HOME_URL = "${basepath}/third/ueditor1.4.3.3/";
 		    </div>
 		  </div>
 		  <div class="form-group">
-		    <label for="blog_subtitle"  class="col-sm-2 control-label">标签</label>
-		   	<div class="col-sm-10">
-		    	
+		    <label for="blog_label"  class="col-sm-2 control-label">标签</label>
+		   	<div class="col-sm-10" id="mylabels">
+		    	<c:forEach items="${labels }" var="label">
+		    		<span class="btn btn-sm cus_label_btn" onclick="chooseLabel(this,'${label['id'] }')" id="label_${label['name'] }">${label['name'] }</span>
+		    	</c:forEach>
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="blog_desc"  class="col-sm-2 control-label">摘要</label>
+		   	<div class="col-sm-10" >
+		    	<textarea style="width: 100%;height: 100px;resize:none;" name="entity.description" placeholder="摘要是用来在前台文章展示介绍的，请务必填写"></textarea>
 		    </div>
 		  </div>
 		  <div class="form-group">
@@ -80,10 +88,17 @@ window.UEDITOR_HOME_URL = "${basepath}/third/ueditor1.4.3.3/";
 				return;
 			}
 			var content= ue.getContent();
-			
+			var labelnames = "";
+			//获取选中的labels
+			$("#mylabels").find(".active").each(function(){
+				labelnames+=$(this).attr("id").substr(6)+",";
+			});
+			labelnames = labelnames.substr(0,labelnames.length-1);
 			var params = {};
 			params["entity.title"] = title;
 			params["entity.subTitle"] = subtitle;
+			params["entity.labels"] = labelnames;
+			params["entity.description"] = $("#blog_description").val();
 			params["content"] = content;
 			
 			$.ajax({
@@ -91,7 +106,12 @@ window.UEDITOR_HOME_URL = "${basepath}/third/ueditor1.4.3.3/";
 				type:"POST",
 				data:params,
 				success:function(data){
-					layer.alert(data);
+					var ret = JSON.parse(data);
+					if(ret){
+						layer.alert("添加成功");
+					}else{
+						layer.alert("添加失败");
+					}
 				}
 			
 			});
@@ -99,6 +119,14 @@ window.UEDITOR_HOME_URL = "${basepath}/third/ueditor1.4.3.3/";
 		}
 		function saveAndPublish(){
 		
+		}
+		
+		function chooseLabel(ele,labelId){
+			if($(ele).hasClass("active")){
+				$(ele).removeClass("active");
+			}else{
+				$(ele).addClass("active");
+			}
 		}
 	</script>
 </body>
