@@ -1,9 +1,9 @@
-#menu {
-	background-image: url("../imgs/mgr_banner2.jpg");
+#menu { /* background-image: url("../imgs/mgr_banner2.jpg"); */
+	background-color: #eee;
 }
 
 #menu .pure-menu-selected,#menu .pure-menu-heading {
-	background: #584d5e;
+	background: #6f6f6f;
 }
 
 .pure-menu-list li:HOVER {
@@ -25,6 +25,11 @@ ul li label {
 
 table tr td {
 	text-align: center;
+}
+
+.table .table-striped .table-bordered>td{
+	padding: 5px;
+	font-size: small;
 }
 
 .header {
@@ -111,12 +116,18 @@ table tr td {
 	cursor: pointer;
 }
 
-.cus_label_btn{
+.cus_label_btn {
 	background-color: #c5cccc;
 }
 
-.active{
+.active {
 	background-color: rgb(40, 119, 46);
-    color: white;
-	
+	color: white;
+}
+
+.cus_welcome {
+	margin-top: 25%;
+	margin-left: 30%;
+	font-size: 30px;
+	font-family: cursive;
 }

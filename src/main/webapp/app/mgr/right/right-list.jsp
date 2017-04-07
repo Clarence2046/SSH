@@ -178,7 +178,7 @@
 		<div class="cus_tip">
 			<label > 系统权限列表 </label>
 		</div>
-		<table  class="table table-striped table-bordered">
+		<table  class="table table-striped table-condensed">
 			<tr>
 				<td>编号</td>
 				<td>父权限编号</td>
@@ -198,8 +198,8 @@
 					<td >${vo.visitUrl }</td>
 					<td >${vo.authLevel==1?"一级菜单":(vo.authLevel==2?"二级菜单":"页面内权限") }</td>
 					<td >${vo.authStatus==0?"启用":"关闭" }</td>
-					<td ><a class="btn btn-danger btn-sm"  onclick="deleteUser('${vo.authId }')"><li class="fa fa-trash"></li></a>
-					|<a class="btn btn-primary btn-sm"  onclick="edit('${vo.authId}')"><li class="fa fa-edit"></li></a>
+					<td ><a class="btn btn-danger btn-xs"  onclick="deleteUser('${vo.authId }')"><li class="fa fa-trash"></li></a>
+					|<a class="btn btn-primary btn-xs"  onclick="edit('${vo.authId}')"><li class="fa fa-edit"></li></a>
 					</td>
 				</tr>
 			</c:forEach>

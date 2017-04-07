@@ -225,7 +225,7 @@
 		<div class="cus_tip">
 			<label > 系统角色列表 ，你可以对角色进行权限管理操作</label>
 		</div>
-		<table  class="table table-striped table-bordered">
+		<table  class="table table-striped table-condensed">
 			<tr>
 				<td>编号</td>
 				<td>角色名称</td>
@@ -236,11 +236,11 @@
 					<td >${vo.roleId }</td>
 					<td >${vo.roleName }</td>
 					<td >
-					<a class="btn btn-danger btn-sm glyphicon glyphicon-trash"  onclick="deleteRole('${vo.roleId }')">
+					<a class="btn btn-danger btn-xs glyphicon glyphicon-trash"  onclick="deleteRole('${vo.roleId }')">
 						删除
 					</a>
 					| 
-					<a class="btn btn-warning btn-sm glyphicon glyphicon-link"  onclick="relateRight('${vo.roleId }')">
+					<a class="btn btn-warning btn-xs glyphicon glyphicon-link"  onclick="relateRight('${vo.roleId }')">
 						关联权限
 					</a>
 					</td>

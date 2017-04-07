@@ -175,7 +175,7 @@
 		<div class="cus_tip">
 			<label > 我的博客列表  </label>
 		</div>
-		<table  class="table table-striped table-bordered">
+		<table  class="table table-striped table-condensed">
 			<tr>
 				<td style="width: 5%">编号</td>
 				<td style="width: 8%">作者</td>

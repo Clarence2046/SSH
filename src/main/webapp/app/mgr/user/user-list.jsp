@@ -209,7 +209,7 @@
 		<div class="cus_tip">
 			<label > 系统用户列表 </label>
 		</div>
-		<table  class="table table-striped table-bordered">
+		<table  class="table table-striped table-condensed">
 			<tr>
 				<td>&nbsp;#</td>
 				<td>用户名</td>
@@ -222,11 +222,11 @@
 					<td >${sysuser.username }</td>
 					<td >${sysuser.type=="1"?"高级管理员":"普通管理员" }</td>
 					<td >
-					<a class="btn btn-danger btn-sm glyphicon glyphicon-trash"  onclick="deleteUser('${sysuser.id }')">
+					<a class="btn btn-danger btn-xs glyphicon glyphicon-trash"  onclick="deleteUser('${sysuser.id }')">
 					删除
 					</a>
 					|
-					<a class="btn btn-warning btn-sm glyphicon glyphicon-link"  onclick="relateRole('${sysuser.id }')">
+					<a class="btn btn-warning btn-xs glyphicon glyphicon-link"  onclick="relateRole('${sysuser.id }')">
 						关联角色
 					</a>
 					</td>

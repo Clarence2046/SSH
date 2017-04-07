@@ -137,7 +137,7 @@
 
     <div id="main">
       	<!-- 填充内容 -->
-      	<i class="fa fa-spinner fa-spin"></i>
+      	<!-- <i class="fa fa-spinner fa-spin"></i>
                         <i class="fa fa-circle-o-notch fa-spin"></i>
                         <i class="fa fa-refresh fa-spin"></i>
                         <i class="fa fa-cog fa-spin"></i>
@@ -147,7 +147,8 @@
          <button style="width: 100px;height: 100px;border-radius:100px 0px;"></button>               
          <button style="width: 100px;height: 100px;border-radius:0px 100px;"></button>               
          <button style="width: 100px;height: 100px;border-radius:0px 50px;"></button>               
-         <button style="width: 100px;height: 100px;border-radius:0px 25px;"></button>               
+         <button style="width: 100px;height: 100px;border-radius:0px 25px;"></button>    --> 
+         <div class="cus_welcome">欢迎来到${LOGIN_USERNAME }的管理后台</div>           
     </div>
 </div>
 <script src="third/pure/side-menu/js/ui.js"></script>
