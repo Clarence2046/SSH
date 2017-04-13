@@ -93,6 +93,9 @@
 	function logout(){
 		window.location.href="${basePath}/logout";
 	}
+	function goFront(){
+		window.location.href="${basePath}/app/front/index";
+	}
 
 </script>
 
@@ -130,6 +133,7 @@
             			</c:otherwise>
             		</c:choose>
             	</c:forEach>
+             <li class="pure-menu-item"><label onclick="goFront()" class="pure-menu-link"> Ç°Ì¨</label></li>
              <li class="pure-menu-item"><label onclick="logout()" class="pure-menu-link"> ÍË³ö</label></li>
             </ul>
         </div>

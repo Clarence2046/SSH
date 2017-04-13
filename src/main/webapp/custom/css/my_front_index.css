@@ -1,0 +1,42 @@
+/**文章列表页面的样式修改*/
+.vic_post{
+	position:relative;
+	height:160px;
+    border-bottom: 1px solid #eee;
+}
+.vic_post .vic_p_pic img{
+	width: 200px;
+	height: 150px;
+	position: absolute;
+	background-image: url("../imgs/default.jpg");
+	right: 10px;
+}
+.vic_post .vic_p_title{
+	position: absolute;
+}
+.vic_post .vic_p_info{
+	position: absolute;
+	bottom:10px;
+	border-bottom: none;
+}
+.vic_post .vic_p_desc{
+	position: absolute;
+	line-height: 25px;
+	height: 100px;
+	max-width: 580px;
+	top: 30px;
+}
+.vic_post .vic_p_more{
+    margin-right: 20px;
+    /* border: 1px solid red; */
+    padding: 5px;
+    background-color: #83a4c3;
+    border-radius:4px 4px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+.vic_post .vic_p_more:HOVER{
+	cursor: pointer;
+	box-shadow:2px 2px 1px;
+}

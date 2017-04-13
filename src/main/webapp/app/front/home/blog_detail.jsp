@@ -18,7 +18,7 @@
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 <meta http-equiv="description" content="This is my page">
 <link rel="stylesheet" href="custom/css/my_front.css">
-<link rel="stylesheet" href="custom/css/my_front_index.css">
+<link rel="stylesheet" href="custom/css/my_front_detail.css">
 <script type="text/javascript" src="third/js/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="custom/js/front.js"></script>
 <script type="text/javascript" src="custom/js/front_extra.js"></script>
@@ -32,8 +32,8 @@
 		<div class="vic_content">
 			<!-- 固定图片文章展示区域 -->
 			<jsp:include page="banner.jsp"></jsp:include>
-			
 			<div></div>
+			
 			<div class="vic_line_colorful"></div>
 			
 			<div class="vic_c_main">
@@ -41,50 +41,56 @@
 				<jsp:include page="left.jsp"></jsp:include>
 				<!-- 中部分栏 -->
 				<div class="vic_c_center">
-					<div class="vic_c_holder">
-						<div class="vic_pic_area">
-							<!-- 最开始设计成放置图片的，但不知道有什么用，所以变了个js动画在这里 -->
-							<!-- <img alt="" src="#"> -->
-							<div class="vic_ball vic_balls" id="ball1"></div>
-							<div class="vic_ball_1 vic_balls"  id="ball2" time="3000"></div>
-							<div class="vic_ball_1 vic_balls" id="ball3" time="3000"></div>
-							<div class="vic_ball_2 vic_balls" id="ball4" time="4000"></div>
-							<div class="vic_ball_2 vic_balls" id="ball5" time="4000"></div>
-							<span class="vic_ball_label vic_balls" id="ball6" time="6000" changeback="false">欢迎你的到来！</span>
-							<script type="text/javascript">
-							</script>
-						</div>
-						<div class="vic_pic_title"></div>
-					</div>
 					<div class="vic_posts">
 						<div class="vic_post_header">
 							<!-- <div class="vic_trangle_l"></div> -->
 							<div class="vic_trangle_r"></div>
 							<div class="vic_header1">
-							最新文章
+								<a href="app/front/index">首页</a> > 
+								<c:if test="${not empty labelName }">
+									<a href="app/front/list?labelName=${labelName }">${labelName }</a> >
+								</c:if>
+								<a>${blog.title }</a>
 							</div>
 						</div>
-						<c:forEach items="${blogs }" var="blog">
-							<div class="vic_post">
-								<label class="vic_p_pic">
-									<img alt="" src="custom/imgs/default.jpg">
-								</label>
-								<label class="vic_p_title">
-									<a href="app/front/blog?id=${blog.id }">${blog.title }-${blog.subTitle }</a>
-								</label>
-								<label class="vic_p_info">
-									作者：${blog.author }&nbsp;  
-									时间 ：<fmt:formatDate value="${blog.createDate }" type="date" pattern="yyyy-MM-dd HH:mm:ss"/>&nbsp;
-									分类：<c:forEach items="${blog.labelsList }" var="label">
-			                            	<a  class="vic_label" href="javascript:;" onclick="listblog('${label}')" >${label }</a> 
-			                           	</c:forEach>
-								</label>
-								<p class="vic_p_desc">
-									${blog.description }
+						<div class="vic_post">
+							<label class="vic_p_title" >
+								${blog.title }-${blog.subTitle }
+							</label>
+							<label class="vic_p_info">
+								作者：${blog.author }&nbsp;  
+								时间 ：<fmt:formatDate value="${blog.createDate }" type="date" pattern="yyyy-MM-dd HH:mm:ss"/>&nbsp;
+								分类：<c:forEach items="${blog.labelsList }" var="label">
+		                            	<a  class="vic_label" href="javascript:;" onclick="listblog('${label}')" >${label }</a> 
+		                           	</c:forEach>
+							</label>
+							<article class="vic_detail_content">
+								<p >
+									${blog.contentHtml }
 								</p>
-							</div>
-						</c:forEach>
-						
+							</article>
+							<c:if test="${blog.lockComment==0 }">
+				                <section class="cus_comment_section">
+								<!-- 评论框展示处 -->
+				                </section>
+				               	<script type="text/javascript">
+				               		var blogId = '${blog.id}';
+				               		$(document).ready(function(){
+				               			loadComments(blogId);
+				               		});
+				               		function loadComments(blogId){
+						      			$.ajax({
+						      				url:"app/front/comments",
+						      				type:"Post",
+						      				data:{"blogId":blogId},
+						      				success:function(data){
+						      					$(".cus_comment_section").html(data);
+						      				}
+						      			});
+						      		}
+				               	</script>
+			                </c:if>
+						</div>
 					</div>
 				</div>
 				<!-- <div class="vic_c_right">

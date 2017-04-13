@@ -22,32 +22,28 @@
 
 </head>
 <div class="cus_page">
-	<div >
-		<c:if test="${page.nextPage>page.page}">
-			<label class="cus_page_btn" onclick="gotopage('${page.nextPage}')">下一页</label>
-		</c:if>
-	</div>
-	<div >
-		<c:if test="${page.prePage<page.page}">
-			<label  class="cus_page_btn" onclick="gotopage('${page.prePage}')">上一页</label>
-		</c:if>
-	</div>
+	<c:if test="${page.prePage<page.page}">
+		<label  class="cus_page_btn" onclick="gotopage('${page.prePage}')">上一页</label>
+	</c:if>
+	<c:if test="${page.nextPage>page.page}">
+		<label class="cus_page_btn" onclick="gotopage('${page.nextPage}')">下一页</label>
+	</c:if>
+	<input type="hidden" name="pageSize" value="${page.pageSize }">
 	<script type="text/javascript">
 		function gotopage(page){
 			var size = 10;
-			var psize = $("select[name=pageSize]").val();
+			var psize = $("input[name=pageSize]").val();
 			if(psize){
 				size = psize;
 			}
-			var detail_blog_id =( blogId==undefined?1:blogId);
 			
 			queryUrl = encodeURI(queryUrl, "utf-8");
 			$.ajax({
 				url:queryUrl,
 				type:"post",
-				data:{"pageRequest.pageSize":size,"pageRequest.page":page,"blogId":detail_blog_id},
+				data:{"pageRequest.pageSize":size,"pageRequest.page":page},
 				success:function(data){
-					$(".cus_comment_section").html(data);
+					$(".vic_c_center").html(data);
 				}
 			});
 		}

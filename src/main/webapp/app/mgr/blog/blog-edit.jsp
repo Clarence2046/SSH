@@ -63,7 +63,7 @@ window.UEDITOR_HOME_URL = "${basepath}/third/ueditor1.4.3.3/";
 		  <div class="form-group">
 		    <label for="blog_description"  class="col-sm-2 control-label">摘要</label>
 		   	<div class="col-sm-10" >
-		    	<textarea style="width: 100%;height: 100px;resize:none;" id="blog_description" name="entity.description" placeholder="摘要是用来在前台文章展示介绍的">${blog.description }</textarea>
+		    	<textarea style="width: 100%;height: 100px;resize:none;" id="blog_description" name="entity.description" placeholder="摘要是用来在前台文章展示介绍的" >${blog.description }</textarea>
 		    </div>
 		  </div>
 		  <div class="form-group">
@@ -120,7 +120,6 @@ window.UEDITOR_HOME_URL = "${basepath}/third/ueditor1.4.3.3/";
 			params["entity.id"] = $("#blogId").val();
 			params["entity.labels"] = labelnames;
 			params["entity.description"] = $("#blog_description").val();
-			
 			$.ajax({
 				url:url,
 				type:"POST",

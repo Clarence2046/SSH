@@ -4,12 +4,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.convention.annotation.ParentPackage;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.shark.ocean.service.IJdbcService;
 import com.shark.ocean.util.PageUtil;
 
+@ParentPackage("json-default")
 public class BaseAction extends ActionSupport {
 
 	/**

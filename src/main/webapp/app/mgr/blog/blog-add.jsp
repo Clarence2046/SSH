@@ -51,7 +51,7 @@ window.UEDITOR_HOME_URL = "${basepath}/third/ueditor1.4.3.3/";
 		  <div class="form-group">
 		    <label for="blog_desc"  class="col-sm-2 control-label">摘要</label>
 		   	<div class="col-sm-10" >
-		    	<textarea style="width: 100%;height: 100px;resize:none;" name="entity.description" placeholder="摘要是用来在前台文章展示介绍的，请务必填写"></textarea>
+		    	<textarea style="width: 100%;height: 100px;resize:none;" name="entity.description" id="blog_description" placeholder="摘要是用来在前台文章展示介绍的，请务必填写"></textarea>
 		    </div>
 		  </div>
 		  <div class="form-group">

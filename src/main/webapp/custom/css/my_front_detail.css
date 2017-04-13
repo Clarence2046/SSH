@@ -1,0 +1,16 @@
+.vic_posts {
+    margin-bottom: 50px;
+}
+.vic_post {
+    padding-bottom: 2px;
+}
+.vic_post_header .vic_header1 a:nth-child(1){
+   	color: #0b58a5;
+   	font-size: 18px;
+}
+.vic_post_header .vic_header1 a:nth-child(2){
+   	color: blue;
+}
+.vic_post_header .vic_header1 a:nth-child(3){
+   	color: green;
+}

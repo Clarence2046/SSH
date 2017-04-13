@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
@@ -29,34 +30,65 @@ public class FrontManageAction extends BaseAction{
 	@Autowired
 	private IBlogService blogService;
 	
-	@Action(value="/app/front/index",results={@Result(name=SUCCESS,location="/app/front/index.jsp")})
+	@Action(value="/app/front/index",results={@Result(name=SUCCESS,location="/app/front/home/home.jsp")})
 	public String index(){
 		List<Blog> all = blogService.getByField("visible", 0);
 		request.setAttribute("blogs", all);
 		return SUCCESS;
 	}
 	
-	@Action(value="/app/front/list",results={@Result(name=SUCCESS,location="/app/front/list.jsp")})
-	public String listByLabel(){
+	/**
+	 * 前台博客列表页面
+	 * @return
+	 */
+	@Action(value="/app/front/list",results={@Result(name=SUCCESS,location="/app/front/home/blog_list.jsp")})
+	public String list(){
+		commonList();
+		return SUCCESS;
+	}
+	
+	/**
+	 * 前台博客列表分页访问方法
+	 * @return
+	 */
+	@Action(value="/app/front/listpage",results={@Result(name=SUCCESS,location="/app/front/home/blog_list_part.jsp")})
+	public String listPage(){
+		commonList();
+		return SUCCESS;
+	}
+
+	private void commonList() {
 		try {
 			String labelName = request.getParameter("labelName");
-			labelName = new String(labelName.getBytes("ISO-8859-1"),"utf-8");
-			List<Map<String,String>> list = jdbcService.getBySql("select id , title,createdate from ocean_blog where labels like '%"+labelName+"%' and visible=0 ");
+			String author = request.getParameter("author");
+			String sql = "select id , title,createdate,description from ocean_blog where visible=0 ";
+			if(StringUtils.isNoneEmpty(labelName)){
+				labelName = new String(labelName.getBytes("ISO-8859-1"),"utf-8");
+				sql += " and labels like '%"+labelName+"%' ";
+				request.setAttribute("labelName", labelName);
+			}
+			if(StringUtils.isNoneEmpty(author)){
+				author = new String(author.getBytes("ISO-8859-1"),"utf-8");
+				sql += " and author like '"+author+"' ";
+				request.setAttribute("author", author);
+			}
+			List<Map<String,String>> list = jdbcService.getBySql(sql);
 			
 			PageUtil page = new PageUtil(list, pageRequest.getPageSize(), pageRequest.getPage(), list.size());
 			request.setAttribute("page", page);
-			request.setAttribute("labelName", labelName);
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-		return SUCCESS;
 	}
-	@Action(value="/app/front/listbyauthor",results={@Result(name=SUCCESS,location="/app/front/list.jsp")})
+	
+	//-----------------------------------------------------
+	
+	@Action(value="/app/front/listbyauthor",results={@Result(name=SUCCESS,location="/app/front/home/blog_list.jsp")})
 	public String listByAuthor(){
 		try {
 			String author = request.getParameter("author");
 			author = new String(author.getBytes("ISO-8859-1"),"utf-8");
-			List<Map<String,String>> list = jdbcService.getBySql("select id , title,createdate from ocean_blog where author like '"+author+"' and visible=0 ");
+			List<Map<String,String>> list = jdbcService.getBySql("select id , title,createdate,description from ocean_blog where author like '"+author+"' and visible=0 ");
 			
 			PageUtil page = new PageUtil(list, pageRequest.getPageSize(), pageRequest.getPage(), list.size());
 			request.setAttribute("page", page);
@@ -66,10 +98,10 @@ public class FrontManageAction extends BaseAction{
 		}
 		return SUCCESS;
 	}
-	@Action(value="/app/front/listall",results={@Result(name=SUCCESS,location="/app/front/list.jsp")})
+	@Action(value="/app/front/listall",results={@Result(name=SUCCESS,location="/app/front/home/blog_list.jsp")})
 	public String listAll(){
 		try {
-			List<Map<String,String>> list = jdbcService.getBySql("select id , title,createdate from ocean_blog where  visible=0 ");
+			List<Map<String,String>> list = jdbcService.getBySql("select id , title,createdate,description from ocean_blog where  visible=0 ");
 			PageUtil page = new PageUtil(list, pageRequest.getPageSize(), pageRequest.getPage(), list.size());
 			request.setAttribute("page", page);
 			request.setAttribute("listdescription", "所有文章");
@@ -78,26 +110,36 @@ public class FrontManageAction extends BaseAction{
 		}
 		return SUCCESS;
 	}
+	//-----------------------------------------------------
 	
-	@Action(value="/app/front/blog",results={@Result(name=SUCCESS,location="/app/front/detail.jsp")})
+	
+	@Action(value="/app/front/blog",results={@Result(name=SUCCESS,location="/app/front/home/blog_detail.jsp")})
 	public String blogDetail(){
-		String id = request.getParameter("id");
-		Blog blog = new Blog();
-		blog.setId(Long.valueOf(id));
-		blog = blogService.getBlog(blog);
-		if(blog.getVisible()==1){
-			blog = new Blog();
+		try {
+			String id = request.getParameter("id");
+			String labelName = request.getParameter("cls");
+			if(StringUtils.isNoneEmpty(labelName)){
+				labelName = new String(labelName.getBytes("ISO-8859-1"),"utf-8");
+				request.setAttribute("labelName", labelName);
+			}
+			Blog blog = new Blog();
+			blog.setId(Long.valueOf(id));
+			blog = blogService.getBlog(blog);
+			if(blog.getVisible()==1){
+				blog = new Blog();
+			}
+			request.setAttribute("blog", blog);
+			Integer views = blog.getViews();
+			if(views==null){
+				views = 0;
+				blog.setViews(views);
+			}
+			views++;
+			//更新查看次数
+			jdbcService.updateBlog(Long.valueOf(id), new String[]{"views"}, new Object[]{views});
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
 		}
-		request.setAttribute("blog", blog);
-		Integer views = blog.getViews();
-		if(views==null){
-			views = 0;
-			blog.setViews(views);
-		}
-		views++;
-		//更新查看次数
-		jdbcService.updateBlog(Long.valueOf(id), new String[]{"views"}, new Object[]{views});
-		
 		return SUCCESS;
 	}
 	
@@ -133,7 +175,7 @@ public class FrontManageAction extends BaseAction{
 		return SUCCESS;
 	}
 	
-	@Action(value="/app/front/comments",results={@Result(name=SUCCESS,location="/app/front/comment.jsp")})
+	@Action(value="/app/front/comments",results={@Result(name=SUCCESS,location="/app/front/common/comment.jsp")})
 	public String comments(){
 		String blogId = request.getParameter("blogId");
 		List<Comment> all = commentService.getByField("blogId", blogId,new String[]{"createDate"},new boolean[]{true});
