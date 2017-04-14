@@ -130,6 +130,10 @@ function flows(ele, lminus, tminus, changeback) {
 		$(ele).css("backgroundColor", color);
 	}
 	$(ele).css("color", color);
+	
+	//如果球之间碰撞了怎么办？能不能终止动画，然后进行下一次动画？先测试走一半时改变坐标
+	
+	
 }
 
 function randommn(from, to) {

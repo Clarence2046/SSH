@@ -3,7 +3,7 @@
 <div class="vic_posts" style="min-height: 700px;background-color: white;">
 <div class="vic_post_header">
 	<!-- <div class="vic_trangle_l"></div> -->
-	<div class="vic_trangle_r"></div>
+	<!-- <div class="vic_trangle_r"></div> -->
 	<div class="vic_header1">
 	<a href="app/front/index">首页</a> >
 	<c:if test="${not empty labelName }">

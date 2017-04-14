@@ -51,6 +51,7 @@
 							<div class="vic_ball_2 vic_balls" id="ball4" time="4000"></div>
 							<div class="vic_ball_2 vic_balls" id="ball5" time="4000"></div>
 							<span class="vic_ball_label vic_balls" id="ball6" time="6000" changeback="false">欢迎你的到来！</span>
+							<!--操作在 front.js-->
 							<script type="text/javascript">
 							</script>
 						</div>
@@ -59,7 +60,7 @@
 					<div class="vic_posts">
 						<div class="vic_post_header">
 							<!-- <div class="vic_trangle_l"></div> -->
-							<div class="vic_trangle_r"></div>
+							<!-- <div class="vic_trangle_r"></div> -->
 							<div class="vic_header1">
 							最新文章
 							</div>

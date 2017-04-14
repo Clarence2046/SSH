@@ -52,7 +52,7 @@ body{
 	position: relative;
 	margin-left: 4%;
 	margin-right: 4%;
-	
+	position: absolute;
 }
 .vic_footer{
 	width: 100%;
@@ -455,6 +455,9 @@ body{
 	text-decoration: none;
 	color: gray;
 }
+.vic_post .vic_p_info a:HOVER{
+	cursor: pointer;
+}
 
 .vic_detail_content{
 	border-bottom: 1px solid #eee;
@@ -803,19 +806,23 @@ padding-bottom: 8px;
 }
 
 .vic_post , .vic_block,.vic_block_2x{
-    background: linear-gradient(90deg,white,#66CCCC);
-    background: -webkit-linear-gradient(90deg,white,#66CCCC);
-    background: -moz-linear-gradient(90deg,white,#66CCCC);
-    background: -o-linear-gradient(90deg,white,#66CCCC);
+    background: linear-gradient(90deg,white,rgba(218, 232, 211, 0.8));
+    background: -webkit-linear-gradient(90deg,white,rgba(218, 232, 211, 0.8));
+    background: -moz-linear-gradient(90deg,white,rgba(218, 232, 211, 0.8));
+    background: -o-linear-gradient(90deg,white,rgba(218, 232, 211, 0.8));
 	background-color: #CCFFFF;
 	color: #5d5757;
 }
 
 .vic_footer{
-	background-color: #CCFFCC;
+	background-color: #66CCCC;
 	color:green;
 }
 
+/**Ö÷ÄÚÈÝÇøÓò*/
+.vic_content{
+	background-color: white;
+}
 body{
 /* 	background: linear-gradient(0deg,black,white,black);
     background: -webkit-linear-gradient(0deg,black,white,black);
