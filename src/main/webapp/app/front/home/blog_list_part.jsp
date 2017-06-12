@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <div class="vic_posts" style="min-height: 700px;background-color: white;">
 <div class="vic_post_header">
 	<!-- <div class="vic_trangle_l"></div> -->
@@ -18,7 +19,12 @@
 			<img alt="" src="custom/imgs/default.jpg">
 		</label>
 		<label class="vic_p_title">
-			<a href="javascript:;" onclick="goDetail('app/front/blog?id=${blog.id }&cls=${labelName }')">${blog.title }-${blog.subTitle }</a>
+			<a href="javascript:;" onclick="goDetail('app/front/blog?id=${blog.id }&cls=${labelName }')">${blog.title }</a>
+		</label>
+		<label class="vic_p_info">
+			作者：${blog.author }&nbsp;  
+			时间 ：<fmt:formatDate value="${blog.createdate }" type="date" pattern="yyyy-MM-dd HH:mm:ss"/>&nbsp;
+			阅读：(${blog.views })
 		</label>
 		<label class="vic_p_desc">
 			${blog.description }

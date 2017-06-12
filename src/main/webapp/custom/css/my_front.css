@@ -37,7 +37,7 @@ body{
 }
 .vic_top{
     width: 100%;
-    height: 243px;
+    height: 188px;
     background-color: #eee;
     background-image:url("../imgs/fbanner1.jpg");
     background-position: 0px -500px;
@@ -52,12 +52,9 @@ body{
 	position: relative;
 	margin-left: 4%;
 	margin-right: 4%;
-	position: absolute;
 }
 .vic_footer{
 	width: 100%;
-	height: 40px;
-	line-height: 40px;
 	background-color: #eee;
 	/* position: fixed;
 	bottom: 0px;
@@ -68,6 +65,8 @@ body{
 	z-index: 9999;
 	float: left;
 	border-top: 1px solid white;
+	height: 60px;
+	line-height: 60px;
 }
 .vic_introduce_0{
 	margin-top: 60px;
@@ -195,6 +194,8 @@ body{
 	max-width: 1120px;
 	/* top:205px;
 	position: absolute; */
+	position: absolute;
+	background-color: white;
 }
 
 .vic_c_left{
@@ -234,7 +235,7 @@ body{
 	border: 10px solid transparent;
 	border-radius:10px 10px;
 	position: absolute;
-	top: 208px;
+	top: 150px;
 	left: 15px;
 }
 
@@ -270,7 +271,8 @@ body{
     margin-bottom: 8px;
     box-shadow: 2px 2px 1px #dbded8;
     border-radius: 4px 4px;
-    max-width: 1100px;
+    width: 3000px;
+    margin-left: -1000px;
 }
 .vic_line_s{
 	width: 98%;
@@ -364,13 +366,13 @@ body{
 }
 .vic_menu{
     margin-left: 42%;  /*500px*/
-    margin-top: 195px;
+    margin-top: 145px;
     position: absolute;
     z-index:9999;
-    transition:margin-left 2s;
-    -webkit-transition:margin-left 2s;
-    -o-transition:margin-left 2s;
-    -moz-transition:margin-left 2s;
+    transition:margin-left 2s,width 2s;
+    -webkit-transition:margin-left 2s,width 2s;
+    -o-transition:margin-left 2s,width 2s;
+    -moz-transition:margin-left 2s,width 2s;
 }
 .vic_menu li{
     display: inline-block;
@@ -384,6 +386,7 @@ body{
     border-right: 2px solid; 
 	border-radius: 5px 5px; 
    /*  -webkit-transition:width 1s,height 1s,margin-top 1s,margin-right 1s; */
+   margin-bottom: 2px;
 }
 .vic_menu li:HOVER {
 	cursor: pointer;
@@ -396,7 +399,22 @@ body{
 	position:fixed;
 	top: 0px;
 	margin-top:0px;
-	margin-left:10px;
+	margin-left:-10px;
+	z-index: 9999;
+	background-color: cadetblue;
+	border-radius: 5px 5px; 
+	background: linear-gradient(30deg,#abc640, white,#abc640, white,#abc640);
+	background: -moz-linear-gradient(30deg,#abc640, white,#abc640, white,#abc640);
+	background: -o-linear-gradient(30deg,#abc640, white,#abc640, white,#abc640);
+	background: -webkit-linear-gradient(30deg,#abc640, white,#abc640, white,#abc640);
+}
+.vic_fix_left{
+	position:fixed;
+	left: 10px;
+	margin-top:30px;
+	margin-left:-20px;
+	display:block;
+	width:45px;
 	z-index: 9999;
 	background-color: cadetblue;
 	border-radius: 5px 5px; 
@@ -407,7 +425,7 @@ body{
 }
 .vic_posts{
 	margin-top: 2px;
-	/* margin-bottom: 100px; */
+	margin-bottom: 100px;
 }
 .vic_post{
     /* border-right-width: 0px;
@@ -469,6 +487,7 @@ body{
 .vic_post .vic_p_info{
 	color: #404044;
     font-size: 12px;
+    font-family:STXingkai;
     width: 100%;
     display: inline-block;
     border-bottom: 1px dashed rgba(22, 22, 23, 0.12);;
@@ -542,14 +561,17 @@ padding-bottom: 8px;
 .vic_label_v{
 	padding-top: 5px;
 	line-height: 30px;
+
 }
 .vic_label_v label{
     display: inline-block;
-    padding: 0px 2px;
+    padding: 0px 5px;
     background-color: #99CCFF;
     margin-top: 5px;
     border-radius:3px 3px;
     margin-right: 5px;
+    min-width: 50px;
+    text-align: center;
 }
 .vic_label_v label:HOVER{
     background-color: #FF6666;
@@ -681,6 +703,7 @@ padding-bottom: 8px;
 	padding-bottom: 2px;
 	height: 20px;
 	line-height: 20px;
+	color: #FF6666;
 }
 .cus_comment_section .cus_comment{
 	padding-bottom: 2px;
@@ -730,18 +753,33 @@ padding-bottom: 8px;
 
 .cus_comment_add{
     height: 30px;
-    width: 50px;
+    width: 80px;
     float: right;
-    margin-right: -205px;
+    margin-right: -230px;
+    cursor: pointer;
+    border-radius:5px 5px; 
+    font-size: 16px;
+    cursor: #808080;
+}
+.cus_comment_add_enable{
+	cursor: pointer;
+}
+.cus_comment_add_enable:HOVER{
+	color: white;
+	background-color: #ff6666;
+}
+.cus_comment_add_disable{
+	cursor: no-drop;
 }
 
 .cus_page {
 	height: 25px;
 	border-radius: 5px 5px;
 	color: gray;
-	margin-bottom: 10px;
+	margin-bottom: 30px;
 	text-align: center;
 	position: relative;
+	margin-top: 20px;
 }
 
 .cus_page_btn {
@@ -753,76 +791,105 @@ padding-bottom: 8px;
     padding: 5px 9px;
     background-color: #e3e3e3;
     border-radius:3px 3px;
+    cursor: pointer;
+}
+.cus_page_btn:HOVER{
+	color: #FF6666;
+}
+.cus_forbidden{
+	cursor: no-drop;
+	
 }
 
 /*网站整体配色方案修改区域*/
 /**几个可以写在一起*/
 .vic_line,.vic_pic_area,.vic_post_header{
-	background: linear-gradient(30deg,#66CCCC,white,white);
+/* 	background: linear-gradient(30deg,#66CCCC,white,white);
     background: -webkit-linear-gradient(30deg,#66CCCC,white,white);
     background: -o-linear-gradient(30deg,#66CCCC,white,white);
-    background: -moz-linear-gradient(30deg,#66CCCC,white,white);
-    color:green; 
+    background: -moz-linear-gradient(30deg,#66CCCC,white,white); */
+    background:none;
+    background-color:white;
+    color:#646764; 
+    
+    box-shadow:none;
+    border-bottom: 1px solid gray;
 }
 
 .vic_pic_area {
-    background: linear-gradient(90deg,#CCFFCC,white);
-    background: -moz-linear-gradient(90deg,#CCFFCC,white);
-    background: -webkit-linear-gradient(90deg,#CCFFCC,white);
-    background: -o-linear-gradient(90deg,#CCFFCC,white);
+    background: linear-gradient(90deg,#f4f7ff,white);
+    background: -moz-linear-gradient(90deg,#f4f7ff,white);
+    background: -webkit-linear-gradient(90deg,#f4f7ff,white);
+    background: -o-linear-gradient(90deg,#f4f7ff,white);
 }
 .vic_post_header {
-    background: linear-gradient(30deg,#66CCCC,white);
+    /* background: linear-gradient(30deg,#66CCCC,white);
     background: -webkit-linear-gradient(30deg,#66CCCC,white);
     background: -o-linear-gradient(30deg,#66CCCC,white);
-    background: -moz-linear-gradient(30deg,#66CCCC,white);
+    background: -moz-linear-gradient(30deg,#66CCCC,white); */
+     background:none;
+    background-color:white;
 }
 .vic_line_colorful {
-    background: linear-gradient(30deg,#66CCCC,white,#66CCCC,white,#66CCCC);
+/*     background: linear-gradient(30deg,#66CCCC,white,#66CCCC,white,#66CCCC);
     background: -webkit-linear-gradient(30deg,#66CCCC,white,#66CCCC,white,#66CCCC);
     background: -o-linear-gradient(30deg,#66CCCC,white,#66CCCC,white,#66CCCC);
-    background: -moz-linear-gradient(30deg,#66CCCC,white,#66CCCC,white,#66CCCC);
+    background: -moz-linear-gradient(30deg,#66CCCC,white,#66CCCC,white,#66CCCC); */
+    background:none;
+    background-color: gray;
 }
 
 
 .vic_top {
 	background-image:none; 
-	background-color: #66CCCC;
+	background-color: #eee;
 }
 
 .vic_introduce_0,.vic_introduce_1,.vic_introduce_2{
-	color: green;
+	color: black;
 }
 
 .vic_fix_top {
-    background: linear-gradient(30deg,#CCFFCC, white,#CCFFCC, white,#CCFFCC);
-    background: -webkit-linear-gradient(30deg,#CCFFCC, white,#CCFFCC, white,#CCFFCC);
-    background: -moz-linear-gradient(30deg,#CCFFCC, white,#CCFFCC, white,#CCFFCC);
-    background: -o-linear-gradient(30deg,#CCFFCC, white,#CCFFCC, white,#CCFFCC);
+    background: linear-gradient(30deg,#eee, white,#eee, white,#eee);
+    background: -webkit-linear-gradient(30deg,#eee, white,#eee, white,#eee);
+    background: -moz-linear-gradient(30deg,#eee, white,#eee, white,#eee);
+    background: -o-linear-gradient(30deg,#eee, white,#eee, white,#eee);
+}
+.vic_fix_left {
+    background: none;
+    background-color: transparent;
 }
 .vic_menu li{
-	background-color: #CCFFCC;
-	color: green;
+	background-color: #fff;
+	color: gray;
 }
 
 .vic_post , .vic_block,.vic_block_2x{
-    background: linear-gradient(90deg,white,rgba(218, 232, 211, 0.8));
+   /*  background: linear-gradient(90deg,white,rgba(218, 232, 211, 0.8));
     background: -webkit-linear-gradient(90deg,white,rgba(218, 232, 211, 0.8));
     background: -moz-linear-gradient(90deg,white,rgba(218, 232, 211, 0.8));
-    background: -o-linear-gradient(90deg,white,rgba(218, 232, 211, 0.8));
-	background-color: #CCFFFF;
+    background: -o-linear-gradient(90deg,white,rgba(218, 232, 211, 0.8)); */
+	background-color: white;
 	color: #5d5757;
+	
+	box-shadow:none;
 }
 
 .vic_footer{
-	background-color: #66CCCC;
-	color:green;
+	background-color: #eeeeee;
+	color:#5d5757;
+
 }
 
 /**主内容区域*/
 .vic_content{
 	background-color: white;
 }
+
+.vic_c_main{
+	background-color: white;
+}
+
 body{
 /* 	background: linear-gradient(0deg,black,white,black);
     background: -webkit-linear-gradient(0deg,black,white,black);

@@ -22,11 +22,27 @@
 
 </head>
 <div class="cus_page">
-	<c:if test="${page.prePage<page.page}">
-		<label  class="cus_page_btn" onclick="gotopage('${page.prePage}')">上一页</label>
-	</c:if>
-	<c:if test="${page.nextPage>page.page}">
-		<label class="cus_page_btn" onclick="gotopage('${page.nextPage}')">下一页</label>
+	<c:if test="${page.totalPage > 1 }">
+	<c:choose>
+		<c:when test="${page.page <=1 }">
+			<label class="cus_page_btn cus_forbidden" >首&nbsp;&nbsp;&nbsp;页</label>
+			<label class="cus_page_btn cus_forbidden" >上一页</label>
+		</c:when>
+		<c:otherwise>
+			<label class="cus_page_btn" onclick="gotopage('${page.prePage}')">首&nbsp;&nbsp;&nbsp;页</label>
+			<label class="cus_page_btn" onclick="gotopage('${page.prePage}')">上一页</label>
+		</c:otherwise>
+	</c:choose>
+	<c:choose>
+		<c:when test="${page.page >= page.totalPage }">
+			<label class="cus_page_btn cus_forbidden" >下一页</label>
+			<label class="cus_page_btn cus_forbidden" >末&nbsp;&nbsp;&nbsp;页</label>
+		</c:when>
+		<c:otherwise>
+			<label class="cus_page_btn" onclick="gotopage('${page.nextPage}')">上一页</label>
+			<label class="cus_page_btn" onclick="gotopage('${page.totalPage}')">末&nbsp;&nbsp;&nbsp;页</label>
+		</c:otherwise>
+	</c:choose>
 	</c:if>
 	<input type="hidden" name="pageSize" value="${page.pageSize }">
 	<script type="text/javascript">

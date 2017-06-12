@@ -13,7 +13,7 @@ public interface IJdbcBaseDao {
 	public List<MenuUtil>  getAllRoles();
 	public void saveUserRoles(String userId,String[] roleIds);
 	
-	public List<Map<String,String>> getBySql(String sql);
+	public List<Map<String,Object>> getBySql(String sql);
 	
 	
 	public void addLabel(String name);

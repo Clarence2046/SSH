@@ -11,17 +11,6 @@
 <html>
 <head>
 <base href="<%=basePath%>">
-<title>My JSP 'home.jsp' starting page</title>
-<meta http-equiv="pragma" content="no-cache">
-<meta http-equiv="cache-control" content="no-cache">
-<meta http-equiv="expires" content="0">
-<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-<meta http-equiv="description" content="This is my page">
-<!-- <link rel="stylesheet" href="custom/css/my_front.css">
-<link rel="stylesheet" href="custom/css/my_front_list.css">
-<script type="text/javascript" src="third/js/jquery-1.10.2.min.js"></script>
-<script type="text/javascript" src="custom/js/front.js"></script>
-<script type="text/javascript" src="custom/js/front_extra.js"></script> -->
 </head>
   <body>
 		<!-- 左边分栏 -->
@@ -75,10 +64,12 @@
 			</script>
 			<div class="vic_line">全站搜索</div>
 			<div class="vic_block vic_search">
-				<label>
-					<input type="text" name="searchTerm" placeholder="输入关键字">
-					<input type="button" value="Search">
-				</label>
+				<form action="app/front/globalsearch.action" method="post" >
+					<label>
+						<input type="text" name="term" placeholder="输入关键字" value="${term }">
+						<input type="submit" value="Search" >
+					</label>
+				</form>
 			</div>
 			
 			<div class="vic_line">文章推荐</div>

@@ -28,6 +28,16 @@ public class Comment {
 	private Integer floor;
 	private Integer replyFloor;
 
+	private String blogName;
+
+	public String getBlogName() {
+		return blogName;
+	}
+
+	public void setBlogName(String blogName) {
+		this.blogName = blogName;
+	}
+
 	public Integer getReplyFloor() {
 		return replyFloor;
 	}

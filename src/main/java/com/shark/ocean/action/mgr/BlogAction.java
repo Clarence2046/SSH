@@ -1,10 +1,5 @@
 package com.shark.ocean.action.mgr;
 
-import java.io.InputStream;
-import java.io.Reader;
-import java.sql.Blob;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -13,16 +8,12 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
-import org.hibernate.type.BlobType;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.support.lob.DefaultLobHandler;
-import org.springframework.jdbc.support.lob.LobCreator;
-import org.springframework.jdbc.support.lob.LobHandler;
 
 import com.shark.ocean.action.base.BaseAction;
+import com.shark.ocean.lucene.LuceneHelper;
 import com.shark.ocean.model.Blog;
 import com.shark.ocean.service.IBlogService;
-import com.shark.ocean.service.impl.JdbcServiceImpl;
 import com.shark.ocean.util.PageUtil;
 
 @ParentPackage("json-default")
@@ -57,7 +48,7 @@ public class BlogAction extends BaseAction {
 	@Action(value = "/app/mgr/blog/addpage", results = { @Result(name = SUCCESS, location = "/app/mgr/blog/blog-add.jsp") })
 	public String goAddBlog() {
 		//查询所有标签
-		List<Map<String, String>> labels = jdbcService.getBySql("select * from ocean_label");
+		List<Map<String, Object>> labels = jdbcService.getBySql("select * from ocean_label");
 		request.setAttribute("labels", labels);
 		
 		
@@ -68,7 +59,7 @@ public class BlogAction extends BaseAction {
 		Blog blog = blogService.getBlog(entity);
 		request.setAttribute("blog", blog);
 		//查询所有标签
-		List<Map<String, String>> labels = jdbcService.getBySql("select * from ocean_label");
+		List<Map<String, Object>> labels = jdbcService.getBySql("select * from ocean_label");
 		request.setAttribute("labels", labels);
 		return SUCCESS;
 	}
@@ -96,6 +87,11 @@ public class BlogAction extends BaseAction {
 			blog.setLabels(labels);
 			
 			blogService.saveOrUpdateBlog(blog);
+			
+			//更新文章的同时，建立索引
+			LuceneHelper  luceneHelper = new LuceneHelper();
+		    
+			luceneHelper.buildIndexForone(entity.toMap());
 			
 			result = true;
 		} catch (Exception e) {
@@ -145,6 +141,12 @@ public class BlogAction extends BaseAction {
 			
 			blogService.saveOrUpdateBlog(entity);
 			result = true;
+			
+			//添加文章的同时，建立索引
+			LuceneHelper  luceneHelper = new LuceneHelper();
+		    
+			luceneHelper.buildIndexForone(entity.toMap() );
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -155,6 +157,9 @@ public class BlogAction extends BaseAction {
 	public String deleteBlog() {
 		try {
 			blogService.delete(entity);
+			
+			//同时删除评论
+			
 			result = true;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -171,7 +176,7 @@ public class BlogAction extends BaseAction {
 	
 	@Action(value = "/app/mgr/blog/labelpage", results = { @Result(name = SUCCESS, location = "/app/mgr/blog/label-list.jsp") })
 	public String labelList() {
-		List<Map<String, String>> labels = jdbcService.getBySql("select * from ocean_label");
+		List<Map<String, Object>> labels = jdbcService.getBySql("select * from ocean_label");
 		request.setAttribute("labels", labels);
 		return SUCCESS;
 	}
@@ -202,6 +207,5 @@ public class BlogAction extends BaseAction {
 		
 		return SUCCESS;
 	}
-	
 
 }

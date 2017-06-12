@@ -24,7 +24,7 @@ public class BaseDaoImpl<T> implements IBaseDao<T> {
 
 	private Class<T> entityClass;
 
-	private String entityName;
+	protected String entityName;
 
 	@SuppressWarnings("unchecked")
 	public BaseDaoImpl() {

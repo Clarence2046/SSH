@@ -20,7 +20,7 @@
 </head>
 
 <body>
-		<div class="cus_line">最新留言</div>
+		<div class="cus_line">最新评论</div>
      	<div class="cus_comment_list">
      		<!-- 评论列表 -->
 			<c:forEach items="${page.pageList }" var="comment">
@@ -63,8 +63,9 @@
 		        	<!-- <label for="comment_area" style="margin-bottom: 10px;border-bottom:1px solid; ">留言</label> -->
 		        	<div>
 		        		<textarea  id="comment_area" maxlength="100" onkeyup="checkCount(this)" onblur="ableSubmit()" placeholder="留下你想说的话吧"></textarea>
-		        		<label class="cus_commenttip">你当前还可以输入100个字</label>
-	        			<button type="button" class="cus_comment_add" onclick="submitComment()" id="addComment" disabled="disabled">发布</button>
+		        		<label class="cus_commenttip">你当前还可以输入100个字
+		        		</label>
+	        			<button type="button" class="cus_comment_add cus_comment_add_disable" disabled="disabled"  onclick="submitComment()" id="addComment" >发布</button>
 		        	</div>
 	      		</div>
 	      	</form>
@@ -94,10 +95,15 @@
       		function ableSubmit(){
       			var txt = $("#comment_area").val();
       			if(txt.length>100 || txt.length<5){
+      				$("#addComment").removeClass("cus_comment_add_enable");
       				$("#addComment").attr("disabled",true);
+      				$("#addComment").addClass("cus_comment_add_disable");
+      				$("#comment_area").focus();
       				return false;
       			}else{
-       			$("#addComment").removeAttr("disabled");
+       				$("#addComment").removeAttr("disabled");
+      				$("#addComment").removeClass("cus_comment_add_disable");
+      				$("#addComment").addClass("cus_comment_add_enable");
       			}
       		}
       		//点击回复事件

@@ -74,6 +74,11 @@
 			
 			});
 		});
+		
+		
+		
+		//获取时间
+		getCurTime();
 	});
 
 	
@@ -96,10 +101,37 @@
 	function goFront(){
 		window.location.href="${basePath}/app/front/index";
 	}
+	
+	//获取当前时间
+	function getCurTime(){
+		var date = new Date();
+		var dd = fmtStr(date.getDate(),2);
+		var MM = fmtStr(date.getMonth(),2);
+		var YYYY = date.getFullYear();
+		var HH = fmtStr(date.getHours(),2); 
+		var mm = fmtStr(date.getMinutes(),2);
+		var ss = fmtStr(date.getSeconds(),2);
+		
+		var str = "系统时间：" +YYYY+"-"+MM+"-"+dd+" "+HH+":"+mm+":"+ss+"";
+		//console.log("系统时间：" +YYYY+"-"+MM+"-"+dd+" "+HH+":"+mm+":"+ss+"");
+		$("#cus_timearea").html(str);
+		setTimeout("getCurTime()",1000);
+	}
+	
+	function fmtStr(str,n){
+		var s = "000000000"+str; 
+		return s.substring(s.length-n,s.length);
+	}
 
 </script>
 
 <body>
+<div class="cus_nav">
+	<div class="cus_area">
+		<div  id="cus_loginUser">当前用户：${LOGIN_USERNAME }</div>
+		<div id="cus_timearea">系统时间：2017-12-20 11:11:11</div>
+	</div>
+</div>
 <div id="layout">
     <!-- Menu toggle -->
     <a href="#menu" id="menuLink" class="menu-link">
@@ -108,7 +140,10 @@
     </a>
     <div id="menu">
         <div class="pure-menu">
-            <label class="pure-menu-heading" >&nbsp;&nbsp;后台管理系统</label>
+            <div class="pure-menu-heading" >
+            		<label class="cus_head_label1">后&nbsp;&nbsp;台</label>
+            		<label class="cus_head_label2">管&nbsp;&nbsp;理</label>
+            </div>
 
             <ul class="pure-menu-list">
             	<c:forEach items="${menus }" var="menu">

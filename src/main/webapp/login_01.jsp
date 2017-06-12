@@ -24,49 +24,27 @@ html,body {
 }
 
 .back {
-	background: -webkit-linear-gradient(white, white,#ccc);
-	background: -o-linear-gradient(white, white,#ccc);
-	background: -moz-linear-gradient(white,white, #ccc);
-	background: linear-gradient(white, white,#ccc); 
+	background: -webkit-linear-gradient(rgba(1, 26, 33, 0.68), #2d2f2d);
+	/* Safari 5.1 - 6.0 */
+	background: -o-linear-gradient(rgba(1, 26, 33, 0.68), #2d2f2d);
+	/* Opera 11.1 - 12.0 */
+	background: -moz-linear-gradient(rgba(1, 26, 33, 0.68), #2d2f2d);
+	/* Firefox 3.6 - 15 */
+	background: linear-gradient(rgba(1, 26, 33, 0.68), #2d2f2d); /* 标准的语法（必须放在最后） */
 	background-size: cover;
-	background-color: black;
 }
 
 .pure-table {
-	width: 100%;
-/* 	box-shadow:5px 5px 3px,
-				5px -5px 3px,
-				-5px 5px 3px,
-				-5px -5px 3px; */
-	border:1px solid transparent;			
 	border-top: 1px solid #777777;
-	-webkit-border-image:url(custom/imgs/tea.jpg) 10 10 round;
-	-moz-border-image:url(custom/imgs/tea.jpg) 10 10 round;
-	-o-border-image:url(custom/imgs/tea.jpg) 10 10 round;
-	border-image:url(custom/imgs/tea.jpg) 10 10 round;
-}
-.pure-table:HOVER {
-	/* box-shadow:3px 3px 2px,
-				3px -3px 2px,
-				-3px 3px 2px,
-				-3px -3px 2px; */
 }
 
 .login_banner {
-	width: 411px;
+	width: 311px;
 	height: 50px;
 	border-radius: 14px 14px 0px 0px;
 	text-align:center;
-	margin-left:0px;
-	border: 3px solid white;
-}
-.login_bottom {
-	width: 411px;
-	height: 220px;
-	text-align:center;
 	margin-left:-25px;
 	border: 3px solid white;
-	border-radius: 0px 0px 14px 14px;
 }
 
 .login_banner .login_title {
@@ -78,33 +56,25 @@ html,body {
 
 .login_form {
 	z-index: 9999;
-	width: 351px;
-	height:200px;
-	z-index: 9999;
-    width: 351px;
-    height: 200px;
-    position: absolute;
-    top: 20%;
-    left: 7%;
+	width: 261px;
+	border-left-width: 5px;
+	border-left-style: dashed;
+	border-right-width: 5px;
+	border-right-style: dashed;
+	border-bottom-style: solid;
+	border-bottom-width: 20px;
+	border-bottom-color: #121213;;;
 	position: absolute;
 }
 
 .login_bg {
-	background-color: transparent;
+	background-color: white;
 }
 
 .login_div {
 	position: absolute;
 	top: 26%;
-	left: 37%;
-	width: 411px;
-    height: 300px;
-    background: -webkit-linear-gradient(#ccc,white, white);
-	background: -o-linear-gradient(#ccc,white, white);
-	background: -moz-linear-gradient( #ccc,white, white);
-	background: linear-gradient(#ccc,white, white); 
-    background-color: white;
-    box-shadow: 3px 1px 2px;
+	left: 41%;
 }
 
 .parallelogram {
@@ -172,21 +142,6 @@ html,body {
     z-index: -10;
 }
 
-.input-group-addon,.form-control{
-	height: 45px;
-}
-.pure-button{
-	width: 100px;
-	height: 36px;
-	font-size: 18px;
-}
-
-.login_title{
-	font-size: 26px;
-    margin-left: 10%;
-    margin-top: 18px;
-    font-weight: bold;
-}
 -->
 </style>
 <script type="text/javascript">
@@ -197,21 +152,21 @@ html,body {
 						console.log(errors);
 						if (errors != undefined && errors.length > 0) {
 							$("#login_error")
-									.html("<label style='color:red;margin:0;'>账号或密码错误</label>");
+									.html(
+											"<label style='color:red;margin:0;'>账号或密码错误</label>");
 						}
 					});
 </script>
 
 <body class="back">
 	<div class="login_div">
-		<!-- <div class="login_banner login_bg">
+		<div class="login_banner login_bg">
 			<label class="login_title">后台管理系统</label>
 			<div class="left_trangle">
 			</div>
 			<div class="right_trangle">
 			</div>
-		</div> -->
-		<div class="login_title">后台管理</div>
+		</div>
 		<div class="login_form login_bg">
 			<form class="pure-form " action="login.action" method="post">
 				<table class="pure-table ">
@@ -248,17 +203,10 @@ html,body {
 				</table>
 			</form>
 		</div>
-		<!-- <div class="parallelogram_1">
+		<div class="parallelogram_1">
 			<div class="parallelogram">
 			</div>
-		</div> -->
-		<!-- <div class="login_bottom login_bg">
-			<label class="login_title">后台管理系统</label>
-			<div class="left_trangle">
-			</div>
-			<div class="right_trangle">
-			</div>
-		</div> -->
+		</div>
 	</div>
 
 </body>

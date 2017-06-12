@@ -10,7 +10,7 @@ public interface IJdbcService {
 
 	public void saveRoleRights(String roleId, String[] rightIds);
 
-	public List<Map<String, String>> getBySql(String sql);
+	public List<Map<String, Object>> getBySql(String sql);
 
 	public List<MenuUtil> getAllRoles();
 

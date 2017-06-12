@@ -43,4 +43,8 @@ public class BlogServiceImpl implements IBlogService {
 		return blogDao.getBlog(blog);
 	}
 
+	public List<Blog> getRecentBlogs(int num) {
+		return blogDao.getRecentBlogs(num);
+	}
+
 }

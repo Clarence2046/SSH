@@ -11,43 +11,13 @@
 <html>
 <head>
 <base href="<%=basePath%>">
-<title>My JSP 'home.jsp' starting page</title>
-<meta http-equiv="pragma" content="no-cache">
-<meta http-equiv="cache-control" content="no-cache">
-<meta http-equiv="expires" content="0">
-<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-<meta http-equiv="description" content="This is my page">
-<!-- <link rel="stylesheet" href="custom/css/my_front.css">
-<link rel="stylesheet" href="custom/css/my_front_list.css">
-<script type="text/javascript" src="third/js/jquery-1.10.2.min.js"></script>
-<script type="text/javascript" src="custom/js/front.js"></script>
-<script type="text/javascript" src="custom/js/front_extra.js"></script> -->
-<script type="text/javascript">
-	$(document).ready(function() {
-		$(".vic_menu li").click(function() {
-			var action = $(this).attr("action");
-			if(action!=undefined){
-				window.location.href = "<%=basePath%>"+action;
-			}
-		});
-
-	});
-</script>
 </head>
-
-<style>
-<!--
-
-
-
--->
-</style>
   <body>
 	<div class="vic_top">
 		<div>
 		<ul class="vic_menu">
 			<li action="app/front/index">首页</li>
-			<li>博览世界</li>
+			<li action="app/front/list">博览世界</li>
 			<li>外语角</li>
 			<li>记录</li>
 			<li>关于我</li>
@@ -60,6 +30,15 @@
 	</div>
   </body>
   <script type="text/javascript">
+  	$(document).ready(function() {
+		$(".vic_menu li").click(function() {
+			var action = $(this).attr("action");
+			if(action!=undefined){
+				window.location.href = "<%=basePath%>"+action;
+			}
+		});
+
+	});
   	window.onscroll=function(){
   		var top = $(".vic_menu").offset().top;
   		var sctop = $(window).scrollTop();
@@ -68,8 +47,13 @@
   		console.log(ptop-sctop);
   		if(top-sctop<=0 && ptop-sctop<=0){
   			//固定到顶部
+  			if($(".vic_menu").hasClass("vic_fix_top")){
+  				return;
+  			}
   			$(".vic_menu").addClass("vic_fix_top");
+  			//$(".vic_menu").addClass("vic_fix_left");
   		}else{
+  			//$(".vic_menu").removeClass("vic_fix_left");
   			$(".vic_menu").removeClass("vic_fix_top");
   		}
   	};

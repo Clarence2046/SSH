@@ -11,7 +11,7 @@
 <html>
 <head>
 <base href="<%=basePath%>">
-<title>My JSP 'home.jsp' starting page</title>
+<title>${blog.title }-TAYLOR-星际旅行</title>
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
@@ -34,8 +34,6 @@
 			<jsp:include page="banner.jsp"></jsp:include>
 			<div></div>
 			
-			<div class="vic_line_colorful"></div>
-			
 			<div class="vic_c_main">
 				<!-- 左边分栏 -->
 				<jsp:include page="left.jsp"></jsp:include>
@@ -55,7 +53,7 @@
 						</div>
 						<div class="vic_post">
 							<label class="vic_p_title" >
-								${blog.title }-${blog.subTitle }
+								${blog.title }
 							</label>
 							<label class="vic_p_info">
 								作者：${blog.author }&nbsp;  
@@ -95,9 +93,9 @@
 				</div>
 				<!-- <div class="vic_c_right">
 				</div> -->
-			</div>
-			<div class="vic_footer">
-				备案号： x-2017-03-25-1002516520
+				<div class="vic_footer">
+					备案号： x-2017-03-25-1002516520
+				</div>
 			</div>
 		</div>
 	</article>

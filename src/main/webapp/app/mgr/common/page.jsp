@@ -49,7 +49,7 @@
 						size = psize;
 					}
 					$.ajax({
-						url:queryUrl,
+						url: encodeURI(queryUrl),
 						type:"post",
 						data:{"pageRequest.pageSize":size,"pageRequest.page":page},
 						success:function(data){

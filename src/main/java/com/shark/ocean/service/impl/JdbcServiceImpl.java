@@ -24,7 +24,7 @@ public class JdbcServiceImpl implements IJdbcService {
 		jdbcDao.saveRoleRights(roleId, rightIds);
 	}
 
-	public List<Map<String, String>> getBySql(String sql) {
+	public List<Map<String, Object>> getBySql(String sql) {
 		return jdbcDao.getBySql(sql);
 	}
 

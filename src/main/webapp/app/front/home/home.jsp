@@ -11,7 +11,7 @@
 <html>
 <head>
 <base href="<%=basePath%>">
-<title>My JSP 'home.jsp' starting page</title>
+<title>TAYLOR-星际旅行</title>
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
@@ -30,11 +30,11 @@
 	<!-- 主内容区域 -->
 	<article style="max-width: 1200px;margin: 0 auto;">
 		<div class="vic_content">
+			
 			<!-- 固定图片文章展示区域 -->
 			<jsp:include page="banner.jsp"></jsp:include>
 			
 			<div></div>
-			<div class="vic_line_colorful"></div>
 			
 			<div class="vic_c_main">
 				<!-- 左边分栏 -->
@@ -90,9 +90,9 @@
 				</div>
 				<!-- <div class="vic_c_right">
 				</div> -->
-			</div>
-			<div class="vic_footer">
-				备案号： x-2017-03-25-1002516520
+				<div class="vic_footer">
+					备案号： x-2017-03-25-1002516520
+				</div>
 			</div>
 		</div>
 	</article>

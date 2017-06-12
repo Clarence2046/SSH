@@ -3,7 +3,13 @@
 }
 
 #menu .pure-menu-selected,#menu .pure-menu-heading {
-	background: #6f6f6f;
+	background: #666666;
+    height: 80px;
+    line-height: 80px;
+    font-size: 26px;
+    padding: 0px 0px;
+    text-align: center;
+        position: relative;
 }
 
 .pure-menu-list li:HOVER {
@@ -13,10 +19,11 @@
 
 .pure-menu-list-second {
 	margin-left: -20px;
+	padding-left: 20px;
 }
 
 .pure-menu-link {
-	color: #888888;
+	color: black;
 }
 
 ul li label {
@@ -34,7 +41,7 @@ table tr td {
 
 .header {
 	margin-bottom: 10px;
-	height: 50px;
+	height: auto;
 	/* 	background-color: lightslategray;
 	background-image: url("../imgs/mgr_banner2.jpg");
 	background-repeat: no-repeat;
@@ -46,7 +53,9 @@ table tr td {
 }
 
 .cus_active { /* background-color: #3B3D3E; */
-	color: rgb(105, 185, 112);
+	/* color: rgb(105, 185, 112); */
+	color: #6699CC;
+	font-weight: bold;
 }
 
 .cus_tip {
@@ -130,4 +139,61 @@ table tr td {
 	margin-left: 30%;
 	font-size: 30px;
 	font-family: cursive;
+}
+.cus_nav{
+	height: 80px;
+    background-color:#eeeeee;
+    position: fixed;
+    top: 0px;
+    /* left:150px; */
+    width: 100%;
+    z-index: 999;
+    border-bottom: 10px solid #eeeeee;
+    border-top: 25px solid white;
+}
+#menu{
+	background-color: #CCCCCC;
+}
+#main{
+	margin-top: 80px;
+}
+.cus_mainTitle{
+	height: 45px;
+    line-height: 45px;
+    width: 150px;
+    text-align: center;
+    font-size: 24px;
+    border-right: 2px solid gray;
+	
+}
+
+.cus_head_label1{
+	height: 40px;
+    line-height: 40px;
+    position: absolute;
+    left: 20px;
+    font-size: 32px;
+}
+.cus_head_label2{
+	height: 40px;
+    line-height: 40px;
+    position: absolute;
+    right: 20px;
+    bottom: 2px;
+     font-size: 32px;
+}
+.cus_area{
+	float: right;
+	margin-right: 100px;
+	margin-top: 5px;
+}
+
+.cus_search_table td{
+	text-align: center;
+	width: 50%;
+	
+}
+
+.pure-menu-item label{
+	cursor: pointer;
 }

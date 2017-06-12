@@ -57,6 +57,7 @@
         <property name="replyUsername" formula="(select c.username from ocean_comment c where c.id=replyid )"/>    
         <property name="floor"   formula="(select count(c.blogId) from ocean_comment c where c.blogId=blogId and c.id between 0 and id)"/>
         <property name="replyFloor"   formula="(select count(c.blogId) from ocean_comment c where c.blogId=blogId and c.id between 0 and replyid)"/>
+        <property name="blogName"   formula="(select c.title from ocean_blog c where c.id=blogId)"/>
             
         <!--     
             组件映射：把多个属性打包在一起当一个属性使用，用来把类的粒度变小。    

@@ -1,5 +1,9 @@
 
 /**文章列表页面的样式修改*/
+.vic_posts{
+	margin-top: 2px;
+	margin-bottom: 0px;
+}
 .vic_post{
 	position:relative;
 	height:160px;
@@ -22,7 +26,7 @@
 	height: 100px;
 	max-width: 580px;
 	left: 210px;
-	top: 30px;
+	top: 60px;
 }
 .vic_post .vic_p_more{
     margin-right: 20px;
@@ -40,9 +44,15 @@
 	background-color: #FF6666;
 }
 
+.vic_post .vic_p_info{
+	position: absolute;
+	top:30px;
+	left: 210px;
+}
+
 .cus_page{
-	float: right;
-	margin-right: 50px;
+/* 	float: right;
+	margin-right: 50px; */
 }
 
 /** 面包屑导航栏  **/

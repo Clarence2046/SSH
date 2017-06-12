@@ -2,7 +2,10 @@ package com.shark.ocean.model;
 
 import java.sql.Blob;
 import java.util.Date;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.shark.ocean.util.DateHelper;
 
 public class Blog {
 	private Long id;
@@ -162,6 +165,18 @@ public class Blog {
 		this.contentHtml = contentHtml;
 	}
 
+	public Map<String,String> toMap(){
+		Map<String, String> infos = new HashMap<String, String>();
+		infos.put("author", this.getAuthor());
+		infos.put("title", this.getTitle());
+		infos.put("createDate", DateHelper.FMT_FULL.format(this.getCreateDate()));
+		infos.put("id", this.getId().toString());
+		infos.put("description", this.getDescription());
+		infos.put("contentHtml", this.getContentHtml());
+		infos.put("labels", this.getLabels());
+		return infos;
+	}
+	
 	@Override
 	public String toString() {
 		return "Blog [id=" + id + ", title=" + title + ", subTitle=" + subTitle

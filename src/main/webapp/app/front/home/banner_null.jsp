@@ -13,25 +13,8 @@
 <base href="<%=basePath%>">
 </head>
   <body>
-    <div class="vic_line_colorful"></div>
 	<div class="vic_c_banner">
 		<ul class="vic_pic_banner">
-			<li>
-				<img alt="" src="custom/imgs/times.jpg">
-				<label class="vic_desc_pic">文字</label>
-			</li>
-			<li>
-				<img alt="" src="custom/imgs/tea.jpg">
-				<label class="vic_desc_pic">文字</label>
-			</li>
-			<li>
-				<img alt="" src="custom/imgs/times.jpg">
-				<label class="vic_desc_pic">文字</label>
-			</li>
-			<li>
-				<img alt="" src="custom/imgs/tea.jpg">
-				<label class="vic_desc_pic">闲暇时光</label>
-			</li>
 		</ul>
 	</div>
   </body>

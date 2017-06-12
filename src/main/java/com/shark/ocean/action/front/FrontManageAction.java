@@ -12,6 +12,7 @@ import org.apache.struts2.convention.annotation.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.shark.ocean.action.base.BaseAction;
+import com.shark.ocean.lucene.LuceneHelper;
 import com.shark.ocean.model.Blog;
 import com.shark.ocean.model.Comment;
 import com.shark.ocean.service.IBlogService;
@@ -32,7 +33,9 @@ public class FrontManageAction extends BaseAction{
 	
 	@Action(value="/app/front/index",results={@Result(name=SUCCESS,location="/app/front/home/home.jsp")})
 	public String index(){
-		List<Blog> all = blogService.getByField("visible", 0);
+		//首页文章列表为最新文章
+		//List<Blog> all = blogService.getByField("visible", 0);
+		List<Blog> all = blogService.getRecentBlogs(8);
 		request.setAttribute("blogs", all);
 		return SUCCESS;
 	}
@@ -61,18 +64,25 @@ public class FrontManageAction extends BaseAction{
 		try {
 			String labelName = request.getParameter("labelName");
 			String author = request.getParameter("author");
-			String sql = "select id , title,createdate,description from ocean_blog where visible=0 ";
+			String sql = "select id , title,author,views,createdate,description from ocean_blog where visible=0 ";
 			if(StringUtils.isNoneEmpty(labelName)){
 				labelName = new String(labelName.getBytes("ISO-8859-1"),"utf-8");
-				sql += " and labels like '%"+labelName+"%' ";
+				if(!"所有文章".equals(labelName)){
+					sql += " and labels like '%"+labelName+"%' ";
+				}
 				request.setAttribute("labelName", labelName);
+			}else{
+				request.setAttribute("listdescription", "所有文章");
 			}
 			if(StringUtils.isNoneEmpty(author)){
 				author = new String(author.getBytes("ISO-8859-1"),"utf-8");
 				sql += " and author like '"+author+"' ";
 				request.setAttribute("author", author);
 			}
-			List<Map<String,String>> list = jdbcService.getBySql(sql);
+			
+			sql += " order by createDate desc";
+			
+			List<Map<String,Object>> list = jdbcService.getBySql(sql);
 			
 			PageUtil page = new PageUtil(list, pageRequest.getPageSize(), pageRequest.getPage(), list.size());
 			request.setAttribute("page", page);
@@ -88,7 +98,7 @@ public class FrontManageAction extends BaseAction{
 		try {
 			String author = request.getParameter("author");
 			author = new String(author.getBytes("ISO-8859-1"),"utf-8");
-			List<Map<String,String>> list = jdbcService.getBySql("select id , title,createdate,description from ocean_blog where author like '"+author+"' and visible=0 ");
+			List<Map<String,Object>> list = jdbcService.getBySql("select id , title,createdate,description from ocean_blog where author like '"+author+"' and visible=0 ");
 			
 			PageUtil page = new PageUtil(list, pageRequest.getPageSize(), pageRequest.getPage(), list.size());
 			request.setAttribute("page", page);
@@ -101,7 +111,7 @@ public class FrontManageAction extends BaseAction{
 	@Action(value="/app/front/listall",results={@Result(name=SUCCESS,location="/app/front/home/blog_list.jsp")})
 	public String listAll(){
 		try {
-			List<Map<String,String>> list = jdbcService.getBySql("select id , title,createdate,description from ocean_blog where  visible=0 ");
+			List<Map<String,Object>> list = jdbcService.getBySql("select id , title,createdate,description from ocean_blog where  visible=0 ");
 			PageUtil page = new PageUtil(list, pageRequest.getPageSize(), pageRequest.getPage(), list.size());
 			request.setAttribute("page", page);
 			request.setAttribute("listdescription", "所有文章");
@@ -164,8 +174,9 @@ public class FrontManageAction extends BaseAction{
 			if(comment.getReplyId()!=null){
 				comment.setType(1);
 			}
-			String id = request.getSession().getId();
-			comment.setUsername(id.substring(id.length()-8));
+			//String id = request.getSession().getId();
+			String remoteHost = request.getRemoteHost();
+			comment.setUsername(remoteHost);
 			
 			commentService.addComment(comment);
 			result = true;
@@ -182,6 +193,26 @@ public class FrontManageAction extends BaseAction{
 		PageUtil  page = new PageUtil(all, pageRequest.getPageSize(), pageRequest.getPage(), all.size());
 		System.out.println(page);
 		request.setAttribute("page", page);
+		return SUCCESS;
+	}
+	
+	
+	
+	/**
+	 * 前台全局搜索
+	 * @return
+	 */
+	@Action(value="/app/front/globalsearch",results={@Result(name=SUCCESS,location="/app/front/home/search_list.jsp")})
+	public String globalSearch(){
+		String term = request.getParameter("term");
+		if(StringUtils.isNotEmpty(term)){
+			LuceneHelper  helper = new LuceneHelper();
+			List<Map<String, String>> searchResults = helper.searchIndex("description", "title:"+term+" content:"+term);
+			request.setAttribute("searchResults", searchResults);
+			request.setAttribute("term", term);
+			request.setAttribute("size", searchResults.size());
+		}
+		
 		return SUCCESS;
 	}
 	

@@ -124,10 +124,10 @@ public class UserManageAction extends BaseAction {
 			getRequest().setAttribute("allRights", allRoles);
 			getRequest().setAttribute("userId", getRequest().getParameter("userId"));
 			
-			List<Map<String, String>>  resultlist = jdbcService.getBySql("select roleid from ocean_user_role where userid='"+getRequest().getParameter("userId")+"'");
+			List<Map<String, Object>>  resultlist = jdbcService.getBySql("select roleid from ocean_user_role where userid='"+getRequest().getParameter("userId")+"'");
 			System.out.println("用户的角色："+resultlist);
-			List<String> hasRights = new ArrayList<String>();
-			for (Map<String, String> map : resultlist) {
+			List<Object> hasRights = new ArrayList<Object>();
+			for (Map<String, Object> map : resultlist) {
 				hasRights.add(map.get("roleid"));
 			}
 			

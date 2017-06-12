@@ -3,6 +3,7 @@ package com.shark.ocean.dao.impl;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -94,15 +95,24 @@ public class JdbcBaseDaoImpl extends JdbcDaoSupport implements IJdbcBaseDao {
 	}
 
 
-	public List<Map<String, String>> getBySql(String sql) {
-		List<Map<String,String>> query = getJdbcTemplate().query(sql, new RowMapper<Map<String, String>>() {
-			public Map<String, String> mapRow(ResultSet rs, int rowNum)
+	public List<Map<String, Object>> getBySql(String sql) {
+		List<Map<String,Object>> query = getJdbcTemplate().query(sql, new RowMapper<Map<String, Object>>() {
+			public Map<String, Object> mapRow(ResultSet rs, int rowNum)
 					throws SQLException {
 				ResultSetMetaData metaData = rs.getMetaData();
 				int columnCount = metaData.getColumnCount();
-				Map<String, String>  map = new HashMap<String, String>();
+				Map<String, Object>  map = new HashMap<String, Object>();
 				for (int i = 1; i <= columnCount; i++) {
-					map.put(metaData.getColumnName(i), rs.getString(i));
+					int columnType = metaData.getColumnType(i);
+					System.out.println("ÀàÐÍ£º"+columnType);
+					if(columnType == Types.TIMESTAMP || columnType == Types.TIME){
+						map.put(metaData.getColumnName(i), rs.getTimestamp(i));
+					}else if(columnType == Types.DATE){
+						map.put(metaData.getColumnName(i), rs.getDate(i));
+					}else{
+						map.put(metaData.getColumnName(i), rs.getString(i));
+					}
+					
 				}
 				return map;
 			}

@@ -25,22 +25,22 @@ public class AjaxFrontAction extends BaseAction {
 	@Autowired
 	private IJdbcService jbdcService;
 	
-	private List<Map<String, String>>  resultList;
+	private List<Map<String, Object>>  resultList;
 	
 	
-	public List<Map<String, String>> getResultList() {
+	public List<Map<String, Object>> getResultList() {
 		return resultList;
 	}
 
 
-	public void setResultList(List<Map<String, String>> resultList) {
+	public void setResultList(List<Map<String, Object>> resultList) {
 		this.resultList = resultList;
 	}
 
 
 	@Action(value="/app/front/ajax/labels",results={@Result(name=SUCCESS,type="json",params={"root","resultList"})})
 	public String ajaxGetLabels(){
-		List<Map<String, String>> labels = jbdcService.getBySql("select id,name from ocean_label");
+		List<Map<String, Object>> labels = jbdcService.getBySql("select id,name from ocean_label");
 		resultList = labels;
 		return SUCCESS;
 	}

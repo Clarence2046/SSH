@@ -12,7 +12,7 @@
 <html>
 <head>
 <base href="<%=basePath%>">
-<title>${labelName }${listdescription }-TAYLOR-星际旅行</title>
+<title>搜索【${term }】的结果-TAYLOR-星际旅行</title>
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
@@ -48,32 +48,31 @@
 							<!-- <div class="vic_trangle_r"></div> -->
 							<div class="vic_header1">
 								<a href="app/front/index">首页</a> >
-								<a>${labelName }${listdescription }</a>
+								查询【${term }】的结果，共找到${size }条满足条件的数据：
 							</div>
 						</div>
-						<c:forEach items="${page.pageList }" var="blog">
+						<c:forEach items="${searchResults }" var="blog">
 							<div class="vic_post">
 								<label class="vic_p_pic">
 									<img alt="" src="custom/imgs/default.jpg">
 								</label>
 								<label class="vic_p_title">
-									<a href="javascript:;" onclick="goDetail('app/front/blog?id=${blog.id }&cls=${labelName }${listdescription }')">${blog.title }</a>
+									<a href="javascript:;" onclick="goDetail('app/front/blog?id=${blog.id }')">${blog.title }</a>
 								</label>
 								<label class="vic_p_info">
 									作者：${blog.author }&nbsp;  
-									时间 ：<fmt:formatDate value="${blog.createdate }" type="date" pattern="yyyy-MM-dd HH:mm:ss"/>&nbsp;
-									阅读：(${blog.views })
+									时间 ：${blog.createDate }&nbsp;
 								</label>
 								<label class="vic_p_desc">
 									${blog.description }
 								</label>
-								<label class="vic_p_more" onclick="goDetail('app/front/blog?id=${blog.id }&cls=${labelName }')">
+								<label class="vic_p_more" onclick="goDetail('app/front/blog?id=${blog.id }')">
 									阅读更多
 								</label>
 							</div>
 						</c:forEach>
 						<jsp:include page="../common/page_1.jsp">
-							<jsp:param value="app/front/listpage?labelName=${labelName }" name="queryurl"/>
+							<jsp:param value="app/front/listpage" name="queryurl"/>
 						</jsp:include>
 					</div>
 				</div>

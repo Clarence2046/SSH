@@ -140,10 +140,10 @@ public class RoleManageAction extends BaseAction {
 			getRequest().setAttribute("allRights", allMenus);
 			getRequest().setAttribute("authId", getRequest().getParameter("authId"));
 			
-			List<Map<String, String>>  resultlist = jdbcService.getBySql("select rightid from ocean_role_right where roleid='"+getRequest().getParameter("authId")+"'");
+			List<Map<String, Object>>  resultlist = jdbcService.getBySql("select rightid from ocean_role_right where roleid='"+getRequest().getParameter("authId")+"'");
 			System.out.println("用户的权限："+resultlist);
-			List<String> hasRights = new ArrayList<String>();
-			for (Map<String, String> map : resultlist) {
+			List<Object> hasRights = new ArrayList<Object>();
+			for (Map<String, Object> map : resultlist) {
 				hasRights.add(map.get("rightid"));
 			}
 			
