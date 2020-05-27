@@ -5,4 +5,4 @@ ENV PATH $CATALINA_HOME/bin:$PATH
 RUN mkdir -p "$CATALINA_HOME"
 WORKDIR $CATALINA_HOME
 
-COPY ssh.war /usr/local/tomcat/webapps
+COPY ./target/ssh.war /usr/local/tomcat/webapps
